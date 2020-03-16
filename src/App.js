@@ -6,6 +6,7 @@ import { Drawer, IconButton, AppBar, Toolbar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import HideOnScroll from "./Components/HideOnScroll";
 import grey from "@material-ui/core/colors/grey";
+import Logo from "./Components/img/logo.png";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -90,11 +91,7 @@ function App(props) {
             >
               <MenuIcon className={classes.menuIcon} />
             </IconButton>
-            <img
-              src="https://edmontoncc.net/wp-content/uploads/2020/01/cropped-로고-6-338x82.png"
-              className={classes.logo}
-              alt="logo"
-            />
+            <img src={Logo} className={classes.logo} alt={"logo"} />
           </Toolbar>
         </AppBar>
       </HideOnScroll>

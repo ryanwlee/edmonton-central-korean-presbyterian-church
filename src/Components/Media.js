@@ -46,11 +46,11 @@ function Media() {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <Typography variant="h4" component="h4" className={classes.title}>
-              2020년 3월 8일 성가대
+              2020년 3월 15일 성가대
             </Typography>
             <div className={classes.youtube}>
               <YoutubePlayer
-                videoId="7NHkab8uMAs"
+                videoId="Ml2YcrjXR6U"
                 playbackState="unstarted"
                 configuration={{
                   showinfo: 0,
