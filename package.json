@@ -11,10 +11,12 @@
     "react-animate-on-scroll": "^2.1.5",
     "react-dom": "^16.11.0",
     "react-id-swiper": "^3.0.0",
+    "react-jw-player": "^1.19.1",
     "react-scripts": "^3.3.0",
     "react-visibility-sensor": "^5.1.1",
     "react-youtube-player": "^2.0.1",
-    "swiper": "^5.3.6"
+    "swiper": "^5.3.6",
+    "video-react": "^0.14.1"
   },
   "scripts": {
     "start": "react-scripts start",

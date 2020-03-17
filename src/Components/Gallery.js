@@ -6,6 +6,8 @@ import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.min.css";
 import "./Gallery.css";
 import Swiper from "react-id-swiper";
+import { Player } from "video-react";
+import "./Video.css";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -33,20 +35,16 @@ const useStyles = makeStyles(theme => ({
 
 const images = [
   {
-    url:
-      "https://edmontoncc.net/wp-content/uploads/2020/01/20200101_003144-768x363.jpg"
+    url: "https://edmontoncc.net/media/photo/20200101_003144-768x363.jpg"
   },
   {
-    url:
-      "https://edmontoncc.net/wp-content/uploads/2020/01/20200101_002926-768x363.jpg"
+    url: "https://edmontoncc.net/media/photo/20200101_002926-768x363.jpg"
   },
   {
-    url:
-      "https://edmontoncc.net/wp-content/uploads/2020/01/20200101_003337-768x363.jpg"
+    url: "https://edmontoncc.net/media/photo/20200101_003337-768x363.jpg"
   },
   {
-    url:
-      "https://edmontoncc.net/wp-content/uploads/2020/01/20200101_002811-768x363.jpg"
+    url: "https://edmontoncc.net/media/photo/20200101_002811-768x363.jpg"
   }
 ];
 
@@ -60,6 +58,11 @@ function Gallery() {
       dynamicBullets: true
     }
   };
+
+  // <Player
+  //   playsInline
+  //   src="https://edmontoncc.net/media/sermon/2020.1.12.S2.mp4"
+  // />;
 
   return (
     <div className={classes.root} id={"gallery"}>
