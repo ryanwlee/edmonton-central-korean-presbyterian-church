@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Modal } from "@material-ui/core";
 import MonthlyVerse from "./MonthlyVerse";
+import Live from "./Live";
 import Sermon from "./Sermon";
 import Media from "./Media";
 import News from "./News";
@@ -12,8 +13,7 @@ import VizSensor from "react-visibility-sensor";
 import grey from "@material-ui/core/colors/grey";
 import Spinner from "./svg/grid.svg";
 
-const headerBackGround =
-  "https://edmontoncc.net/wp-content/uploads/2020/01/본당4-scaled.jpg";
+const headerBackGround = "https://edmontoncc.net/media/photo/본당4-scaled.jpg";
 
 const useStyles = makeStyles(theme => ({
   content: {
@@ -101,6 +101,12 @@ function Content({ setScreen }) {
     }
   }
 
+  function liveOnChange(isVisible) {
+    if (isVisible) {
+      setScreen("live");
+    }
+  }
+
   function sermonOnChange(isVisible) {
     if (isVisible) {
       setScreen("sermon");
@@ -182,6 +188,13 @@ function Content({ setScreen }) {
         onChange={monthlyVerseOnChange}
       >
         <MonthlyVerse />
+      </VizSensor>
+      <VizSensor
+        partialVisibility
+        offset={{ top: 460, bottom: 300 }}
+        onChange={liveOnChange}
+      >
+        <Live />
       </VizSensor>
       <VizSensor
         partialVisibility

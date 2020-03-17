@@ -50,6 +50,15 @@ function Menu(current) {
         요절 말씀
       </Link>
       <Link
+        href={"#live"}
+        className={
+          current.current === "live" ? classes.selectedLink : classes.link
+        }
+        onClick={() => onClick()}
+      >
+        LIVE
+      </Link>
+      <Link
         href={"#sermon"}
         className={
           current.current === "sermon" ? classes.selectedLink : classes.link
