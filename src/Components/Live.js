@@ -46,7 +46,7 @@ function Live() {
           <Divider />
         </div>
         <iframe
-          src="https://www.youtube.com/embed/db2GJRZdTBE"
+          src="https://www.youtube.com/embed/live_stream?channel=UCzz-Hi9PzGYiQE0zEOn8idg"
           style={{
             border: 0,
             width: "100%",
@@ -58,14 +58,17 @@ function Live() {
           allowfullscreen
         ></iframe>
         <div className={classes.desc}>
-          <Typography variant="body1" display="block" gutterBottom>
-            Live 방송 일정:
+          <Typography variant="h5" display="block" gutterBottom>
+            Live 방송 일정
           </Typography>
           <Typography variant="body1" display="block" gutterBottom>
             주일 11시 2부 예배
           </Typography>
           <Typography variant="body1" display="block" gutterBottom>
             수요일 7시 30분 수요예배
+          </Typography>
+          <Typography variant="body1" display="block" gutterBottom>
+            토요일 6시 30분 청년부 예배
           </Typography>
         </div>
       </ScrollAnimation>
