@@ -1,4 +1,5 @@
 import React from "react";
+import { CookiesProvider } from "react-cookie";
 import { HashRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Menu from "./Components/Menu";
 import Content from "./Components/Content";
@@ -78,39 +79,41 @@ function App(props) {
 
   return (
     <Router>
-      <div className={classes.root}>
-        <Drawer open={state.left} onClose={toggleDrawer("left", false)}>
-          <Menu current={screen.current} toggleDrawer={toggleDrawer} />
-        </Drawer>
-        <HideOnScroll>
-          <AppBar className={classes.appbar}>
-            <Toolbar>
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                edge="start"
-                onClick={toggleDrawer("left", true)}
-                className={classes.menuButton}
-              >
-                <MenuIcon className={classes.menuIcon} />
-              </IconButton>
-              <Link to={"/"}>
-                <img src={Logo} className={classes.logo} alt={"logo"} />
-              </Link>
-            </Toolbar>
-          </AppBar>
-        </HideOnScroll>
-        <div className={classes.body}>
-          <Switch>
-            <Route path="/*/sermon">
-              <SermonPage />
-            </Route>
-            <Route path="/">
-              <Content setScreen={setScreen} />
-            </Route>
-          </Switch>
+      <CookiesProvider>
+        <div className={classes.root}>
+          <Drawer open={state.left} onClose={toggleDrawer("left", false)}>
+            <Menu current={screen.current} toggleDrawer={toggleDrawer} />
+          </Drawer>
+          <HideOnScroll>
+            <AppBar className={classes.appbar}>
+              <Toolbar>
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  edge="start"
+                  onClick={toggleDrawer("left", true)}
+                  className={classes.menuButton}
+                >
+                  <MenuIcon className={classes.menuIcon} />
+                </IconButton>
+                <Link to={"/"}>
+                  <img src={Logo} className={classes.logo} alt={"logo"} />
+                </Link>
+              </Toolbar>
+            </AppBar>
+          </HideOnScroll>
+          <div className={classes.body}>
+            <Switch>
+              <Route path="/*/sermon">
+                <SermonPage />
+              </Route>
+              <Route path="/">
+                <Content setScreen={setScreen} />
+              </Route>
+            </Switch>
+          </div>
         </div>
-      </div>
+      </CookiesProvider>
     </Router>
   );
 }

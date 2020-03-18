@@ -54,6 +54,8 @@ const useStyles = makeStyles(theme => ({
   },
   videoPlaylist: {
     minWidth: "400px",
+    height: "550px",
+    overflow: "scroll",
     [theme.breakpoints.down("sm")]: {
       width: "100%",
       minWidth: "100%"
@@ -61,7 +63,8 @@ const useStyles = makeStyles(theme => ({
   },
   videoPlayer: {
     margin: "auto",
-    outline: "none"
+    outline: "none",
+    height: "550px"
   },
   videoTitle: {
     marginTop: "auto",
@@ -143,7 +146,13 @@ function SermonPage({ setScreen }) {
         <Divider />
       </div>
       <div className={classes.sermonContainer}>
-        <Player ref={player} autoPlay className={classes.videoPlayer}>
+        <Player
+          ref={player}
+          fluid={false}
+          autoPlay
+          className={classes.videoPlayer}
+          width={"100%"}
+        >
           <source src={videoUrlPrefix + curVideo} />
         </Player>
         <div className={classes.videoPlaylist}>
