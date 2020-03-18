@@ -5,6 +5,7 @@ import grey from "@material-ui/core/colors/grey";
 import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.min.css";
 import YoutubePlayer from "react-youtube-player";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -32,6 +33,12 @@ const useStyles = makeStyles(theme => ({
   youtube: {
     marginTop: "50px",
     height: "300px"
+  },
+  link: {
+    color: grey[800],
+    fontSize: "1rem",
+    textAlign: "center",
+    marginTop: "25px"
   }
 }));
 
@@ -91,6 +98,16 @@ function Sermon() {
               17 하늘로부터 소리가 있어 말씀하시되 이는 내 사랑하는 아들이요 내
               기뻐하는 자라 하시니라
             </Typography>
+            <Link to={"/sermon"}>
+              <Typography
+                variant="caption"
+                display="block"
+                gutterBottom
+                className={classes.link}
+              >
+                더 많은 설교 영상을 원하신다면...
+              </Typography>
+            </Link>
           </Grid>
         </Grid>
       </ScrollAnimation>

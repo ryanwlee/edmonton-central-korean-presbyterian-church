@@ -1,6 +1,8 @@
 import React from "react";
+import { HashRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Menu from "./Components/Menu";
 import Content from "./Components/Content";
+import SermonPage from "./Components/SermonPage";
 import MenuIcon from "@material-ui/icons/Menu";
 import { Drawer, IconButton, AppBar, Toolbar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -75,30 +77,41 @@ function App(props) {
   };
 
   return (
-    <div className={classes.root}>
-      <Drawer open={state.left} onClose={toggleDrawer("left", false)}>
-        <Menu current={screen.current} toggleDrawer={toggleDrawer} />
-      </Drawer>
-      <HideOnScroll>
-        <AppBar className={classes.appbar}>
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              onClick={toggleDrawer("left", true)}
-              className={classes.menuButton}
-            >
-              <MenuIcon className={classes.menuIcon} />
-            </IconButton>
-            <img src={Logo} className={classes.logo} alt={"logo"} />
-          </Toolbar>
-        </AppBar>
-      </HideOnScroll>
-      <div className={classes.body}>
-        <Content setScreen={setScreen} />
+    <Router>
+      <div className={classes.root}>
+        <Drawer open={state.left} onClose={toggleDrawer("left", false)}>
+          <Menu current={screen.current} toggleDrawer={toggleDrawer} />
+        </Drawer>
+        <HideOnScroll>
+          <AppBar className={classes.appbar}>
+            <Toolbar>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="start"
+                onClick={toggleDrawer("left", true)}
+                className={classes.menuButton}
+              >
+                <MenuIcon className={classes.menuIcon} />
+              </IconButton>
+              <Link to={"/"}>
+                <img src={Logo} className={classes.logo} alt={"logo"} />
+              </Link>
+            </Toolbar>
+          </AppBar>
+        </HideOnScroll>
+        <div className={classes.body}>
+          <Switch>
+            <Route path="/*/sermon">
+              <SermonPage />
+            </Route>
+            <Route path="/">
+              <Content setScreen={setScreen} />
+            </Route>
+          </Switch>
+        </div>
       </div>
-    </div>
+    </Router>
   );
 }
 

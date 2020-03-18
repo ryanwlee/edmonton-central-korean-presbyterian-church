@@ -1,10 +1,12 @@
 import React from "react";
-import Link from "@material-ui/core/Link";
+// import { Link } from "react-router-dom";
 import grey from "@material-ui/core/colors/grey";
 import { makeStyles } from "@material-ui/core/styles";
 import MapIcon from "@material-ui/icons/Map";
 import CallIcon from "@material-ui/icons/Call";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
+import ExtLink from "@material-ui/core/Link";
+import { HashLink as Link } from "react-router-hash-link";
 
 const drawerWidth = 240;
 
@@ -39,7 +41,18 @@ function Menu(current) {
   return (
     <div className={classes.menu}>
       <Link
-        href={"#monthlyverse"}
+        to={"/"}
+        className={
+          current.current === "monthlyverse"
+            ? classes.selectedLink
+            : classes.link
+        }
+        onClick={() => onClick()}
+      >
+        HOME
+      </Link>
+      <Link
+        to={"/#monthlyverse"}
         className={
           current.current === "monthlyverse"
             ? classes.selectedLink
@@ -50,7 +63,7 @@ function Menu(current) {
         요절 말씀
       </Link>
       <Link
-        href={"#live"}
+        to={"/#live"}
         className={
           current.current === "live" ? classes.selectedLink : classes.link
         }
@@ -59,7 +72,7 @@ function Menu(current) {
         LIVE
       </Link>
       <Link
-        href={"#sermon"}
+        to={"/*/sermon"}
         className={
           current.current === "sermon" ? classes.selectedLink : classes.link
         }
@@ -68,7 +81,7 @@ function Menu(current) {
         SERMON
       </Link>
       <Link
-        href={"#media"}
+        to={"/#media"}
         className={
           current.current === "media" ? classes.selectedLink : classes.link
         }
@@ -77,7 +90,7 @@ function Menu(current) {
         MEDIA
       </Link>
       <Link
-        href={"#news"}
+        to={"/#news"}
         className={
           current.current === "news" ? classes.selectedLink : classes.link
         }
@@ -86,7 +99,7 @@ function Menu(current) {
         NEWS
       </Link>
       <Link
-        href={"#gallery"}
+        to={"/#gallery"}
         className={
           current.current === "gallery" ? classes.selectedLink : classes.link
         }
@@ -95,7 +108,7 @@ function Menu(current) {
         GALLERY
       </Link>
       <Link
-        href={"#contact"}
+        to={"/#contact"}
         className={
           current.current === "contact" ? classes.selectedLink : classes.link
         }
@@ -103,20 +116,23 @@ function Menu(current) {
       >
         오시는 길
       </Link>
-      <Link
+      <ExtLink
         href={
           "https://www.google.com/maps/dir//%EC%97%90%EB%93%9C%EB%A8%BC%ED%8A%BC+%EC%A4%91%EC%95%99%EC%9E%A5%EB%A1%9C%EA%B5%90%ED%9A%8C/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x53a01e985c81374d:0xf0cee281dde253b7?sa=X&ved=2ahUKEwj-mrqekZvoAhXWi54KHfhUCM4Q9RcwFXoECBAQEA"
         }
         className={classes.link}
       >
         <MapIcon />
-      </Link>
-      <Link href={"tel:1-780-437-6229"} className={classes.link}>
+      </ExtLink>
+      <ExtLink href={"tel:1-780-437-6229"} className={classes.link}>
         <CallIcon />
-      </Link>
-      <Link href={"mailto:eckpc1988@edmontoncc.net"} className={classes.link}>
+      </ExtLink>
+      <ExtLink
+        href={"mailto:eckpc1988@edmontoncc.net"}
+        className={classes.link}
+      >
         <MailOutlineIcon />
-      </Link>
+      </ExtLink>
     </div>
   );
 }

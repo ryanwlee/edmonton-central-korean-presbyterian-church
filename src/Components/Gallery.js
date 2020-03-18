@@ -6,8 +6,6 @@ import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.min.css";
 import "./Gallery.css";
 import Swiper from "react-id-swiper";
-import { Player } from "video-react";
-import "./Video.css";
 
 const useStyles = makeStyles(theme => ({
   root: {

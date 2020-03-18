@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Divider } from "@material-ui/core";
+import { Typography, Divider, Link } from "@material-ui/core";
 import grey from "@material-ui/core/colors/grey";
 import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.min.css";
@@ -46,13 +46,16 @@ function Live() {
           <Divider />
         </div>
         <iframe
-          src="https://www.youtube.com/embed/live_stream?channel=UCzz-Hi9PzGYiQE0zEOn8idg"
+          src="https://www.youtube.com/embed/live_stream?channel=UCzz-Hi9PzGYiQE0zEOn8idg&
+          enablecastapi=1&enablejsapi=1"
           style={{
             border: 0,
             width: "100%",
             height: "auto",
             minHeight: "500px"
           }}
+          enablejsapi="1"
+          enablecastapi="1"
           frameborder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
@@ -70,6 +73,15 @@ function Live() {
           <Typography variant="body1" display="block" gutterBottom>
             토요일 6시 30분 청년부 예배
           </Typography>
+          <Link
+            href={
+              "https://www.youtube.com/channel/UCzz-Hi9PzGYiQE0zEOn8idg/live"
+            }
+          >
+            <Typography variant="body1" display="block" gutterBottom>
+              유튜브에서 보기
+            </Typography>
+          </Link>
         </div>
       </ScrollAnimation>
     </div>
