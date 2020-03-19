@@ -98,7 +98,7 @@ function Sermon() {
               17 하늘로부터 소리가 있어 말씀하시되 이는 내 사랑하는 아들이요 내
               기뻐하는 자라 하시니라
             </Typography>
-            <Link to={"/sermon"}>
+            <Link to={"/*/sermon"}>
               <Typography
                 variant="caption"
                 display="block"
