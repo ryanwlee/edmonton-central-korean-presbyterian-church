@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   },
   live: {
     width: "100%",
-    height: "600px"
+    height: "500px"
   },
   header: {
     marginLeft: "auto",

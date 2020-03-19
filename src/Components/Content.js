@@ -119,6 +119,14 @@ const useStyles = makeStyles(theme => ({
       marginTop: "40px",
       height: "400px",
       padding: theme.spacing(5, 4, 5)
+    },
+    [theme.breakpoints.up("lg")]: {
+      marginTop: "100px",
+      height: "600px"
+    },
+    [theme.breakpoints.up("xl")]: {
+      marginTop: "130px",
+      height: "700px"
     }
   },
   indent: {
@@ -207,8 +215,6 @@ function Content({ setScreen }) {
       setScreen("header");
     }
   }
-
-  console.log(pop, cookies);
 
   return (
     <div className={classes.content}>

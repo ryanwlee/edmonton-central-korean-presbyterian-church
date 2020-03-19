@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   },
   youtube: {
     marginTop: "50px",
-    height: "300px"
+    height: "400px"
   }
 }));
 

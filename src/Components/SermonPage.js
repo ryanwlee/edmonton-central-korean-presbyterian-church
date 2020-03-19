@@ -11,6 +11,7 @@ import audioSpinner from "./svg/audio.svg";
 
 const videoUrlPrefix = "https://edmontoncc.net/media/sermon/";
 const videos = [
+  { name: "3월 18일 예배", src: "2020.3.18.wed.mp4", key: "20200318" },
   { name: "3월 8일 설교", src: "2020.3.8.s2.mp4", key: "20200308" },
   { name: "3월 1일 설교", src: "2020.3.1.s2.mp4", key: "20200301" },
   { name: "2월 23일 설교", src: "2020.2.23.s2.mp4", key: "20200223" },
@@ -59,12 +60,24 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down("sm")]: {
       width: "100%",
       minWidth: "100%"
+    },
+    [theme.breakpoints.up("lg")]: {
+      height: "700px"
+    },
+    [theme.breakpoints.up("xl")]: {
+      height: "800px"
     }
   },
   videoPlayer: {
     margin: "auto",
     outline: "none",
-    height: "550px"
+    height: "550px",
+    [theme.breakpoints.up("lg")]: {
+      height: "700px"
+    },
+    [theme.breakpoints.up("xl")]: {
+      height: "800px"
+    }
   },
   videoTitle: {
     marginTop: "auto",
@@ -128,7 +141,6 @@ function SermonPage({ setScreen }) {
   const [expanded, setExpanded] = React.useState(videos[0].key);
 
   const handleChange = panel => (event, newExpanded) => {
-    console.log(player);
     if (panel.src !== curVideo) {
       player.current.video.pause();
       setCurVideo(panel.src);

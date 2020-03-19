@@ -60,7 +60,7 @@ function News() {
               gutterBottom
               className={classes.content}
             >
-              <ol>
+              <ul>
                 <li className={classes.li}>
                   예배 시작 10분전에 오셔서 기도로 준비하시기 바랍니다.
                 </li>
@@ -86,7 +86,7 @@ function News() {
                   분들은 자가격리 (2주간-14일)를 하신 후 예배와 모임에
                   출석하시길 부탁드립니다.
                 </li>
-              </ol>
+              </ul>
             </Typography>
           </Grid>
           <Grid item xs={12} sm={6} className={classes.contentContainer}>
@@ -99,7 +99,7 @@ function News() {
               gutterBottom
               className={classes.content}
             >
-              <ol>
+              <ul>
                 <li className={classes.li}>
                   제직회: 다음 주일(22일) 2부 예배 후
                 </li>
@@ -114,7 +114,7 @@ function News() {
                   금번 에드몬톤 카이로스 코스(선교훈련)가 코로나 바이러스(COVID
                   19)로 인하여 취소 되었습니다.
                 </li>
-              </ol>
+              </ul>
             </Typography>
           </Grid>
         </Grid>
