@@ -65,13 +65,13 @@ function Live() {
             Live 방송 일정
           </Typography>
           <Typography variant="body1" display="block" gutterBottom>
-            주일 11시 2부 예배
+            주일 예배: 오전 11시
           </Typography>
           <Typography variant="body1" display="block" gutterBottom>
-            수요일 7시 30분 수요예배
+            수요 예배: 저녁 7시 30분
           </Typography>
           <Typography variant="body1" display="block" gutterBottom>
-            토요일 6시 30분 청년부 예배
+            청년부 예배: 토요일 저녁 6시 30분
           </Typography>
           <Link
             href={

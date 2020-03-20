@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { Typography, Divider } from "@material-ui/core";
 import MuiExpansionPanel from "@material-ui/core/ExpansionPanel";
@@ -63,9 +63,6 @@ const useStyles = makeStyles(theme => ({
     },
     [theme.breakpoints.up("lg")]: {
       height: "700px"
-    },
-    [theme.breakpoints.up("xl")]: {
-      height: "800px"
     }
   },
   videoPlayer: {
@@ -74,9 +71,6 @@ const useStyles = makeStyles(theme => ({
     height: "550px",
     [theme.breakpoints.up("lg")]: {
       height: "700px"
-    },
-    [theme.breakpoints.up("xl")]: {
-      height: "800px"
     }
   },
   videoTitle: {
@@ -134,11 +128,34 @@ const ExpansionPanelDetails = withStyles(theme => ({
   }
 }))(MuiExpansionPanelDetails);
 
+async function fetchData() {
+  const proxyurl = "https://cors-anywhere.herokuapp.com/";
+  const response = await fetch("https://edmontoncc.net/db/sermons.json");
+  const result = await response.json();
+  console.log(result);
+  return result;
+}
+
 function SermonPage({ setScreen }) {
   const classes = useStyles();
   const player = useRef(null);
-  const [curVideo, setCurVideo] = React.useState(videos[0].src);
-  const [expanded, setExpanded] = React.useState(videos[0].key);
+  const [curVideo, setCurVideo] = React.useState("");
+  const [expanded, setExpanded] = React.useState("");
+
+  const initState = {
+    sermons: []
+  };
+  const [sermons, setSermons] = useState(initState.sermons);
+
+  useEffect(() => {
+    async function getSermons() {
+      const result = await fetchData();
+      setCurVideo(result.sermons[0].src);
+      setExpanded(result.sermons[0].key);
+      setSermons(result.sermons);
+    }
+    getSermons();
+  }, []);
 
   const handleChange = panel => (event, newExpanded) => {
     if (panel.src !== curVideo) {
@@ -158,49 +175,55 @@ function SermonPage({ setScreen }) {
         <Divider />
       </div>
       <div className={classes.sermonContainer}>
-        <Player
-          ref={player}
-          fluid={false}
-          autoPlay
-          className={classes.videoPlayer}
-          width={"100%"}
-        >
-          <source src={videoUrlPrefix + curVideo} />
-        </Player>
+        {sermons && sermons.length > 0 ? (
+          <Player
+            ref={player}
+            fluid={false}
+            autoPlay
+            className={classes.videoPlayer}
+            width={"100%"}
+          >
+            <source src={videoUrlPrefix + curVideo} />
+          </Player>
+        ) : (
+          ""
+        )}
         <div className={classes.videoPlaylist}>
-          {videos.map(video => {
-            return (
-              <ExpansionPanel
-                square
-                expanded={expanded === video.key}
-                onChange={handleChange(video)}
-                key={video.key}
-              >
-                <ExpansionPanelSummary
-                  aria-controls="panel1d-content"
-                  id="panel1d-header"
-                >
-                  <Typography className={classes.videoTitle}>
-                    {video.name}
-                  </Typography>
-                  {video.src === curVideo ? (
-                    <img
-                      src={audioSpinner}
-                      className={classes.Spinner}
-                      alt={"spinner"}
-                    />
-                  ) : (
-                    ""
-                  )}
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                  <Typography>
-                    {video.name + "에 있었던 2부 예배 설교입니다."}
-                  </Typography>
-                </ExpansionPanelDetails>
-              </ExpansionPanel>
-            );
-          })}
+          {sermons && sermons.length > 0
+            ? sermons.map(video => {
+                return (
+                  <ExpansionPanel
+                    square
+                    expanded={expanded === video.key}
+                    onChange={handleChange(video)}
+                    key={video.key}
+                  >
+                    <ExpansionPanelSummary
+                      aria-controls="panel1d-content"
+                      id="panel1d-header"
+                    >
+                      <Typography className={classes.videoTitle}>
+                        {video.name}
+                      </Typography>
+                      {video.src === curVideo ? (
+                        <img
+                          src={audioSpinner}
+                          className={classes.Spinner}
+                          alt={"spinner"}
+                        />
+                      ) : (
+                        ""
+                      )}
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                      <Typography>
+                        {video.name + "에 있었던 2부 예배 설교입니다."}
+                      </Typography>
+                    </ExpansionPanelDetails>
+                  </ExpansionPanel>
+                );
+              })
+            : ""}
         </div>
       </div>
       <Footer />

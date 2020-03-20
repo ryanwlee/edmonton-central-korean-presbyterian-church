@@ -33,13 +33,7 @@ const useStyles = makeStyles(theme => ({
   },
   videoPlayer: {
     marginTop: "50px",
-    height: "400px",
-    [theme.breakpoints.up("lg")]: {
-      height: "500px"
-    },
-    [theme.breakpoints.up("xl")]: {
-      height: "600px"
-    }
+    height: "500px"
   },
   link: {
     color: grey[800],
@@ -49,17 +43,15 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-// async function fetchData() {
-//   const proxyurl = "https://cors-anywhere.herokuapp.com/";
-//   const response = await fetch(proxyurl + "https://edmontoncc.net/db/db.json");
-//   const result = await response.json();
-//   console.log(result);
-//   return result;
-// }
+async function fetchData() {
+  const proxyurl = "https://cors-anywhere.herokuapp.com/";
+  const response = await fetch("https://edmontoncc.net/db/sermon.json");
+  const result = await response.json();
+  return result;
+}
 
 function Sermon() {
   const classes = useStyles();
-
   const initState = {
     src: "",
     title: "",
@@ -70,8 +62,8 @@ function Sermon() {
 
   useEffect(() => {
     async function getSermon() {
-      // const sermon = await fetchData();
-      // setSermon(sermon.mainSermon);
+      const sermon = await fetchData();
+      setSermon(sermon.mainSermon);
     }
     getSermon();
   }, []);
@@ -93,41 +85,50 @@ function Sermon() {
               className={classes.title}
             ></Typography>
             <div className={classes.player}>
-              <Player
-                fluid={false}
-                className={classes.videoPlayer}
-                width={"100%"}
-              >
-                <source
-                  src={"https://edmontoncc.net/media/sermon/2020.3.18.wed.mp4"}
-                />
-              </Player>
+              {sermon && sermon.src !== "" ? (
+                <Player
+                  fluid={false}
+                  className={classes.videoPlayer}
+                  width={"100%"}
+                >
+                  <source src={sermon.src} />
+                </Player>
+              ) : (
+                ""
+              )}
             </div>
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <Typography variant="h4" component="h4" className={classes.title}>
-              3월 18일
-            </Typography>
-            <Typography variant="h5" component="h5" className={classes.title}>
-              수요예배 입니다.
-            </Typography>
-            <Typography
-              variant="caption"
-              display="block"
-              gutterBottom
-              className={classes.content}
-            ></Typography>
-            <Link to={"/*/sermon"}>
+          {sermon ? (
+            <Grid item xs={12} sm={6}>
+              (
+              <Typography variant="h4" component="h4" className={classes.title}>
+                {sermon.title}
+              </Typography>
+              <Typography variant="h5" component="h5" className={classes.title}>
+                {sermon.secondTitle}
+              </Typography>
               <Typography
                 variant="caption"
                 display="block"
                 gutterBottom
-                className={classes.link}
+                className={classes.content}
               >
-                더 많은 설교 영상을 원하신다면...
+                {sermon.desc}
               </Typography>
-            </Link>
-          </Grid>
+              <Link to={"/*/sermon"}>
+                <Typography
+                  variant="caption"
+                  display="block"
+                  gutterBottom
+                  className={classes.link}
+                >
+                  더 많은 설교 영상을 원하신다면...
+                </Typography>
+              </Link>
+            </Grid>
+          ) : (
+            ""
+          )}
         </Grid>
       </ScrollAnimation>
     </div>

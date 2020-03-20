@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
   },
   header: {
     display: "flex",
-    height: "100%",
+    height: "100vh",
     minHeight: "100vh",
     width: "100%",
     flexDirection: "column",
@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
   },
   background: {
     backgroundImage: `url(${headerBackGround})`,
-    opacity: "25%",
+    opacity: "40%",
     width: "100%",
     height: "100vh",
     position: "absolute",
@@ -102,7 +102,7 @@ const useStyles = makeStyles(theme => ({
   paper: {
     zIndex: 1,
     width: "60%",
-    height: "500px",
+    height: "600px",
     overflow: "scroll",
     marginLeft: "auto",
     marginRight: "auto",
@@ -119,14 +119,6 @@ const useStyles = makeStyles(theme => ({
       marginTop: "40px",
       height: "400px",
       padding: theme.spacing(5, 4, 5)
-    },
-    [theme.breakpoints.up("lg")]: {
-      marginTop: "100px",
-      height: "600px"
-    },
-    [theme.breakpoints.up("xl")]: {
-      marginTop: "130px",
-      height: "700px"
     }
   },
   indent: {
