@@ -100,7 +100,6 @@ function Sermon() {
           </Grid>
           {sermon ? (
             <Grid item xs={12} sm={6}>
-              (
               <Typography variant="h4" component="h4" className={classes.title}>
                 {sermon.title}
               </Typography>
