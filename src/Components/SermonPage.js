@@ -10,18 +10,6 @@ import "./Video.css";
 import audioSpinner from "./svg/audio.svg";
 
 const videoUrlPrefix = "https://edmontoncc.net/media/sermon/";
-const videos = [
-  { name: "3월 18일 예배", src: "2020.3.18.wed.mp4", key: "20200318" },
-  { name: "3월 8일 설교", src: "2020.3.8.s2.mp4", key: "20200308" },
-  { name: "3월 1일 설교", src: "2020.3.1.s2.mp4", key: "20200301" },
-  { name: "2월 23일 설교", src: "2020.2.23.s2.mp4", key: "20200223" },
-  { name: "2월 16일 설교", src: "2020.2.16.s2.mp4", key: "20200216" },
-  { name: "2월 9일 설교", src: "2020.2.9.s2.mp4", key: "20200209" },
-  { name: "2월 2일 설교", src: "2020.2.2.s2.mp4", key: "20200202" },
-  { name: "1월 26일 설교", src: "2020.1.26.s2.mp4", key: "20200126" },
-  { name: "1월 19일 설교", src: "2020.1.19.s2.mp4", key: "20200119" },
-  { name: "1월 12일 설교", src: "2020.1.12.S2.mp4", key: "20200112" }
-];
 
 const useStyles = makeStyles(theme => ({
   content: {
@@ -129,11 +117,21 @@ const ExpansionPanelDetails = withStyles(theme => ({
 }))(MuiExpansionPanelDetails);
 
 async function fetchData() {
-  const proxyurl = "https://cors-anywhere.herokuapp.com/";
-  const response = await fetch("https://edmontoncc.net/db/sermons.json");
+  const response = await fetch(process.env.REACT_APP_API_SERVER_URL_SERMONS);
+  console.log(response);
   const result = await response.json();
-  console.log(result);
-  return result;
+  console.log(
+    result.data.sort(function(a, b) {
+      if (a.sermondate > b.sermondate) {
+        return -1;
+      }
+      if (b.sermondate > a.sermondate) {
+        return 1;
+      }
+      return 0;
+    })
+  );
+  return result.data;
 }
 
 function SermonPage({ setScreen }) {
@@ -150,9 +148,11 @@ function SermonPage({ setScreen }) {
   useEffect(() => {
     async function getSermons() {
       const result = await fetchData();
-      setCurVideo(result.sermons[0].src);
-      setExpanded(result.sermons[0].key);
-      setSermons(result.sermons);
+      if (result && result.length > 0) {
+        setCurVideo(result[0].src);
+        setExpanded(result[0].sermondate);
+        setSermons(result);
+      }
     }
     getSermons();
   }, []);
@@ -196,14 +196,14 @@ function SermonPage({ setScreen }) {
                     square
                     expanded={expanded === video.key}
                     onChange={handleChange(video)}
-                    key={video.key}
+                    key={video.sermondate}
                   >
                     <ExpansionPanelSummary
                       aria-controls="panel1d-content"
                       id="panel1d-header"
                     >
                       <Typography className={classes.videoTitle}>
-                        {video.name}
+                        {video.title}
                       </Typography>
                       {video.src === curVideo ? (
                         <img
@@ -217,7 +217,9 @@ function SermonPage({ setScreen }) {
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
                       <Typography>
-                        {video.name + "에 있었던 2부 예배 설교입니다."}
+                        {video.description
+                          ? video.description
+                          : video.title + "에 있었던 2부 예배 설교입니다."}
                       </Typography>
                     </ExpansionPanelDetails>
                   </ExpansionPanel>
