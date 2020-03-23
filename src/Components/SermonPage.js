@@ -43,6 +43,7 @@ const useStyles = makeStyles(theme => ({
   },
   videoPlaylist: {
     minWidth: "400px",
+    maxWidth: "600px",
     height: "550px",
     overflow: "scroll",
     [theme.breakpoints.down("sm")]: {
@@ -64,7 +65,12 @@ const useStyles = makeStyles(theme => ({
   videoTitle: {
     marginTop: "auto",
     marginBottom: "auto",
-    fontSize: "1.1rem"
+    fontSize: "1.1rem",
+    whiteSpace: "pre-wrap"
+  },
+  videoDescription: {
+    fontSize: "0.9rem",
+    whiteSpace: "pre-wrap"
   },
   Spinner: {
     marginTop: "auto",
@@ -117,10 +123,15 @@ const ExpansionPanelDetails = withStyles(theme => ({
 }))(MuiExpansionPanelDetails);
 
 async function fetchData() {
-  const response = await fetch(process.env.REACT_APP_API_SERVER_URL_SERMONS);
-  console.log(response);
+  const url = process.env.REACT_APP_API_SERVER_URL_SERMONS;
+  // const response = await fetch("https://edmontoncc.net/db/sermons.json");
+  // const result = await response.json();
+  // console.log(result);
+
+  const response = await fetch(url);
   const result = await response.json();
-  console.log(
+  console.log(result);
+  if (result.data && result.data.length > 0) {
     result.data.sort(function(a, b) {
       if (a.sermondate > b.sermondate) {
         return -1;
@@ -129,8 +140,9 @@ async function fetchData() {
         return 1;
       }
       return 0;
-    })
-  );
+    });
+  }
+
   return result.data;
 }
 
@@ -152,6 +164,7 @@ function SermonPage({ setScreen }) {
         setCurVideo(result[0].src);
         setExpanded(result[0].sermondate);
         setSermons(result);
+        console.log(result[0].content.split("0x4E"));
       }
     }
     getSermons();
@@ -163,7 +176,7 @@ function SermonPage({ setScreen }) {
       setCurVideo(panel.src);
       player.current.video.load();
     }
-    setExpanded(newExpanded ? panel.key : false);
+    setExpanded(newExpanded ? panel.sermondate : false);
   };
 
   return (
@@ -194,7 +207,7 @@ function SermonPage({ setScreen }) {
                 return (
                   <ExpansionPanel
                     square
-                    expanded={expanded === video.key}
+                    expanded={expanded === video.sermondate}
                     onChange={handleChange(video)}
                     key={video.sermondate}
                   >
@@ -216,9 +229,9 @@ function SermonPage({ setScreen }) {
                       )}
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
-                      <Typography>
-                        {video.description
-                          ? video.description
+                      <Typography className={classes.videoDescription}>
+                        {video.content && video.content !== ""
+                          ? video.content
                           : video.title + "에 있었던 2부 예배 설교입니다."}
                       </Typography>
                     </ExpansionPanelDetails>

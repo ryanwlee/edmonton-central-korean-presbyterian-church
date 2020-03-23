@@ -33,6 +33,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const youtubeChannel = "UCEbPOOV7M21JwKyJj-uJ1GQ";
+
 function Live() {
   const classes = useStyles();
 
@@ -46,8 +48,8 @@ function Live() {
           <Divider />
         </div>
         <iframe
-          src="https://www.youtube.com/embed/live_stream?channel=UCzz-Hi9PzGYiQE0zEOn8idg&
-          enablecastapi=1&enablejsapi=1"
+          src={`https://www.youtube.com/embed/live_stream?channel=${youtubeChannel}&
+          enablecastapi=1&enablejsapi=1`}
           style={{
             border: 0,
             width: "100%",
@@ -73,11 +75,7 @@ function Live() {
           <Typography variant="body1" display="block" gutterBottom>
             청년부 예배: 토요일 저녁 6시 30분
           </Typography>
-          <Link
-            href={
-              "https://www.youtube.com/channel/UCzz-Hi9PzGYiQE0zEOn8idg/live"
-            }
-          >
+          <Link href={`https://www.youtube.com/channel/${youtubeChannel}/live`}>
             <Typography variant="body1" display="block" gutterBottom>
               유튜브에서 보기
             </Typography>

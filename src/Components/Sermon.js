@@ -47,6 +47,7 @@ async function fetchData() {
   const proxyurl = "https://cors-anywhere.herokuapp.com/";
   const response = await fetch("https://edmontoncc.net/db/sermon.json");
   const result = await response.json();
+  console.log(result);
   return result;
 }
 
