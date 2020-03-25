@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Divider } from "@material-ui/core";
 import grey from "@material-ui/core/colors/grey";
@@ -6,6 +6,7 @@ import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.min.css";
 import "./Gallery.css";
 import Swiper from "react-id-swiper";
+import { sortResult } from "./helper";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,23 +32,30 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const images = [
-  {
-    url: "https://edmontoncc.net/media/photo/20200101_003144-768x363.jpg"
-  },
-  {
-    url: "https://edmontoncc.net/media/photo/20200101_002926-768x363.jpg"
-  },
-  {
-    url: "https://edmontoncc.net/media/photo/20200101_003337-768x363.jpg"
-  },
-  {
-    url: "https://edmontoncc.net/media/photo/20200101_002811-768x363.jpg"
-  }
-];
+async function fetchData() {
+  const url = process.env.REACT_APP_API_SERVER_URL_GALLERY;
+  const response = await fetch(url);
+  const result = await response.json();
+  const sortedResult = sortResult(result);
+
+  console.log(sortedResult);
+  return sortedResult.data;
+}
 
 function Gallery() {
   const classes = useStyles();
+  const initState = {
+    images: []
+  };
+  const [images, setImages] = useState(initState.images);
+
+  useEffect(() => {
+    async function getNews() {
+      const result = await fetchData();
+      setImages(result);
+    }
+    getNews();
+  }, []);
 
   const params = {
     pagination: {
@@ -56,11 +64,6 @@ function Gallery() {
       dynamicBullets: true
     }
   };
-
-  // <Player
-  //   playsInline
-  //   src="https://edmontoncc.net/media/sermon/2020.1.12.S2.mp4"
-  // />;
 
   return (
     <div className={classes.root} id={"gallery"}>
@@ -71,13 +74,17 @@ function Gallery() {
           </Typography>
           <Divider />
         </div>
-        <div className={classes.gallery}>
-          <Swiper {...params}>
-            {images.map(img => {
-              return <img src={`${img.url}`} alt="img" />;
-            })}
-          </Swiper>
-        </div>
+        {images && images.length > 0 ? (
+          <div className={classes.gallery}>
+            <Swiper {...params}>
+              {images.map(img => {
+                return <img src={`${img.src}`} alt="img" />;
+              })}
+            </Swiper>
+          </div>
+        ) : (
+          ""
+        )}
       </ScrollAnimation>
     </div>
   );

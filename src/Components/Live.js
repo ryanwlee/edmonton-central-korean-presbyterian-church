@@ -33,9 +33,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const youtubeChannel = "UCEbPOOV7M21JwKyJj-uJ1GQ";
-
-function Live() {
+function Live(props) {
   const classes = useStyles();
 
   return (
@@ -47,21 +45,25 @@ function Live() {
           </Typography>
           <Divider />
         </div>
-        <iframe
-          src={`https://www.youtube.com/embed/live_stream?channel=${youtubeChannel}&
+        {props.youtubeChannel ? (
+          <iframe
+            src={`https://www.youtube.com/embed/live_stream?channel=${props.youtubeChannel}&
           enablecastapi=1&enablejsapi=1`}
-          style={{
-            border: 0,
-            width: "100%",
-            height: "auto",
-            minHeight: "500px"
-          }}
-          enablejsapi="1"
-          enablecastapi="1"
-          frameborder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
+            style={{
+              border: 0,
+              width: "100%",
+              height: "auto",
+              minHeight: "500px"
+            }}
+            enablejsapi="1"
+            enablecastapi="1"
+            frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        ) : (
+          ""
+        )}
         <div className={classes.desc}>
           <Typography variant="h5" display="block" gutterBottom>
             Live 방송 일정
@@ -75,11 +77,17 @@ function Live() {
           <Typography variant="body1" display="block" gutterBottom>
             청년부 예배: 토요일 저녁 6시 30분
           </Typography>
-          <Link href={`https://www.youtube.com/channel/${youtubeChannel}/live`}>
-            <Typography variant="body1" display="block" gutterBottom>
-              유튜브에서 보기
-            </Typography>
-          </Link>
+          {props.youtubeChannel ? (
+            <Link
+              href={`https://www.youtube.com/channel/${props.youtubeChannel}/live`}
+            >
+              <Typography variant="body1" display="block" gutterBottom>
+                유튜브에서 보기
+              </Typography>
+            </Link>
+          ) : (
+            ""
+          )}
         </div>
       </ScrollAnimation>
     </div>

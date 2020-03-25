@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function Media() {
+function Media(props) {
   const classes = useStyles();
 
   return (
@@ -46,11 +46,11 @@ function Media() {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <Typography variant="h4" component="h4" className={classes.title}>
-              2020년 3월 15일 성가대
+              {props.choirtitle}
             </Typography>
             <div className={classes.youtube}>
               <YoutubePlayer
-                videoId="Ml2YcrjXR6U"
+                videoId={props.choirvideo}
                 playbackState="unstarted"
                 configuration={{
                   showinfo: 0,
@@ -61,11 +61,11 @@ function Media() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <Typography variant="h4" component="h4" className={classes.title}>
-              2020년 3월 8일 찬양팀
+              {props.singingtitle}
             </Typography>
             <div className={classes.youtube}>
               <YoutubePlayer
-                videoId="x4b3KOUFGYk"
+                videoId={props.singingvideo}
                 playbackState="unstarted"
                 configuration={{
                   showinfo: 0,

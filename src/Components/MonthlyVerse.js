@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   from: { marginTop: "30px" }
 }));
 
-function MonthlyVerse() {
+function MonthlyVerse(props) {
   const classes = useStyles();
 
   return (
@@ -28,15 +28,13 @@ function MonthlyVerse() {
       <ScrollAnimation animateIn="fadeIn" offset={50}>
         <Paper className={classes.card} elevation={3}>
           <Typography variant="h4" component="h4" className={classes.title}>
-            3월 요절 말씀
+            {props.monthlyversetitle}
           </Typography>
           <Typography variant="h5" component="h5" className={classes.verse}>
-            그가 찔림은 우리의 허물 때문이요 그가 상함은 우리의 죄악 때문이라
-            그가 징계를 받으므로 우리는 평화를 누리고 그가 채찍에 맞으므로
-            우리는 나음을 받았도다
+            {props.monthlyverse}
           </Typography>
           <Typography variant="h5" component="h5" className={classes.from}>
-            이사야 53장 5절
+            {props.monthlyversesecondtitle}
           </Typography>
         </Paper>
       </ScrollAnimation>

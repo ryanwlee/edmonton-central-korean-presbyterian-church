@@ -4,6 +4,7 @@ import { Typography, Grid, Divider } from "@material-ui/core";
 import grey from "@material-ui/core/colors/grey";
 import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.min.css";
+import { sortResult } from "./helper";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -41,11 +42,28 @@ const useStyles = makeStyles(theme => ({
 }));
 
 async function fetchData() {
-  const proxyurl = "https://cors-anywhere.herokuapp.com/";
-  const response = await fetch("https://edmontoncc.net/db/news.json");
-  const result = await response.json();
-  console.log(result);
-  return result;
+  const newsUrl = process.env.REACT_APP_API_SERVER_URL_NEWS;
+  const eventsUrl = process.env.REACT_APP_API_SERVER_URL_EVENTS;
+
+  // const response = await fetch("https://edmontoncc.net/db/news.json");
+  // const result = await response.json();
+  // console.log(result);
+
+  const newsResponse = await fetch(newsUrl);
+  const eventResponse = await fetch(eventsUrl);
+  const newsResult = await newsResponse.json();
+  const eventsResult = await eventResponse.json();
+
+  console.log(newsResult, eventsResult);
+  const sortedNewsResult = sortResult(newsResult);
+  const sortedEventsResult = sortResult(eventsResult);
+
+  const final = {
+    news: sortedNewsResult.data,
+    events: sortedEventsResult.data
+  };
+
+  return final;
 }
 
 function News() {
@@ -61,7 +79,7 @@ function News() {
     async function getNews() {
       const result = await fetchData();
       setNews(result.news);
-      setEvent(result.event);
+      setEvent(result.events);
     }
     getNews();
   }, []);
@@ -88,7 +106,12 @@ function News() {
             >
               <ul>
                 {news && news.length > 0
-                  ? news.map(n => <li className={classes.li}>{`${n}`}</li>)
+                  ? news.map(n => (
+                      <li
+                        className={classes.li}
+                        key={n.listorder}
+                      >{`${n.content}`}</li>
+                    ))
                   : ""}
               </ul>
             </Typography>
@@ -105,7 +128,11 @@ function News() {
             >
               <ul>
                 {event && event.length > 0
-                  ? event.map(e => <li className={classes.li}>{e}</li>)
+                  ? event.map(e => (
+                      <li className={classes.li} key={e.listorder}>
+                        {`${e.content}`}
+                      </li>
+                    ))
                   : ""}
               </ul>
             </Typography>

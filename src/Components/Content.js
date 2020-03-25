@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Modal } from "@material-ui/core";
@@ -134,8 +134,37 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+async function fetchData() {
+  const url = process.env.REACT_APP_API_SERVER_URL_MAINSETTING;
+  const response = await fetch(url);
+  const result = await response.json();
+
+  console.log(result);
+  return result.data[0];
+}
+
 function Content({ setScreen }) {
   const classes = useStyles();
+  const initState = {
+    monthlyversetitle: "",
+    monthlyversesecondtitle: "",
+    monthlyverse: "",
+    liveyoutubechannel: "",
+    choirtitle: "",
+    choirvideo: "",
+    singingtitle: "",
+    singingvideo: ""
+  };
+  const [mainsetting, setMainsetting] = useState(initState);
+
+  useEffect(() => {
+    async function getSetting() {
+      const result = await fetchData();
+      setMainsetting(result);
+    }
+    getSetting();
+  }, []);
+
   const [isLoading, setIsLoading] = useState(false);
 
   const [cookies, setCookie] = useCookies(["edmontoncc"]);
@@ -420,14 +449,18 @@ function Content({ setScreen }) {
         offset={{ top: 460, bottom: 300 }}
         onChange={monthlyVerseOnChange}
       >
-        <MonthlyVerse />
+        <MonthlyVerse
+          monthlyversetitle={mainsetting.monthlyversetitle}
+          monthlyversesecondtitle={mainsetting.monthlyversesecondtitle}
+          monthlyverse={mainsetting.monthlyverse}
+        />
       </VizSensor>
       <VizSensor
         partialVisibility
         offset={{ top: 460, bottom: 300 }}
         onChange={liveOnChange}
       >
-        <Live />
+        <Live youtubeChannel={mainsetting.liveyoutubechannel} />
       </VizSensor>
       <VizSensor
         partialVisibility
@@ -441,7 +474,12 @@ function Content({ setScreen }) {
         offset={{ top: 460, bottom: 300 }}
         onChange={mediaOnChange}
       >
-        <Media />
+        <Media
+          choirtitle={mainsetting.choirtitle}
+          choirvideo={mainsetting.choirvideo}
+          singingtitle={mainsetting.singingtitle}
+          singingvideo={mainsetting.singingvideo}
+        />
       </VizSensor>
       <VizSensor
         partialVisibility

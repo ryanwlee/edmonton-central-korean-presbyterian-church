@@ -29,7 +29,8 @@ const useStyles = makeStyles(theme => ({
   },
   content: {
     marginTop: "50px",
-    fontSize: "1rem"
+    fontSize: "1rem",
+    whiteSpace: "pre-wrap"
   },
   videoPlayer: {
     marginTop: "50px",
@@ -44,11 +45,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 async function fetchData() {
-  const proxyurl = "https://cors-anywhere.herokuapp.com/";
-  const response = await fetch("https://edmontoncc.net/db/sermon.json");
+  const url = process.env.REACT_APP_API_SERVER_URL_SERMON;
+  const response = await fetch(url);
   const result = await response.json();
+
   console.log(result);
-  return result;
+  return result.data[0];
 }
 
 function Sermon() {
@@ -64,7 +66,7 @@ function Sermon() {
   useEffect(() => {
     async function getSermon() {
       const sermon = await fetchData();
-      setSermon(sermon.mainSermon);
+      setSermon(sermon);
     }
     getSermon();
   }, []);
@@ -105,7 +107,7 @@ function Sermon() {
                 {sermon.title}
               </Typography>
               <Typography variant="h5" component="h5" className={classes.title}>
-                {sermon.secondTitle}
+                {sermon.secondtitle}
               </Typography>
               <Typography
                 variant="caption"
@@ -113,7 +115,7 @@ function Sermon() {
                 gutterBottom
                 className={classes.content}
               >
-                {sermon.desc}
+                {sermon.description}
               </Typography>
               <Link to={"/*/sermon"}>
                 <Typography
