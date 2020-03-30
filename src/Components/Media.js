@@ -4,8 +4,10 @@ import { Typography, Grid, Divider } from "@material-ui/core";
 import grey from "@material-ui/core/colors/grey";
 import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.min.css";
-import YoutubePlayer from "react-youtube-player";
+import { Player } from "video-react";
+import "./Video.css";
 
+// css styles
 const useStyles = makeStyles(theme => ({
   root: {
     marginLeft: "auto",
@@ -28,6 +30,10 @@ const useStyles = makeStyles(theme => ({
   youtube: {
     marginTop: "50px",
     height: "400px"
+  },
+  videoPlayer: {
+    marginTop: "50px",
+    height: "500px"
   }
 }));
 
@@ -43,37 +49,47 @@ function Media(props) {
           </Typography>
           <Divider />
         </div>
+        {/* Use grid to render two boxes for large screen, one box for small screen */}
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
-            <Typography variant="h4" component="h4" className={classes.title}>
-              {props.choirtitle}
-            </Typography>
-            <div className={classes.youtube}>
-              <YoutubePlayer
-                videoId={props.choirvideo}
-                playbackState="unstarted"
-                configuration={{
-                  showinfo: 0,
-                  controls: 0
-                }}
-              />
-            </div>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Typography variant="h4" component="h4" className={classes.title}>
-              {props.singingtitle}
-            </Typography>
-            <div className={classes.youtube}>
-              <YoutubePlayer
-                videoId={props.singingvideo}
-                playbackState="unstarted"
-                configuration={{
-                  showinfo: 0,
-                  controls: 0
-                }}
-              />
-            </div>
-          </Grid>
+          {/* Left box */}
+          {props.choirvideo ? (
+            <Grid item xs={12} sm={6}>
+              <Typography variant="h4" component="h4" className={classes.title}>
+                {props.choirtitle}
+              </Typography>
+              <div className={classes.player}>
+                <Player
+                  fluid={false}
+                  className={classes.videoPlayer}
+                  width={"100%"}
+                >
+                  <source src={props.choirvideo} />
+                </Player>
+              </div>
+            </Grid>
+          ) : (
+            ""
+          )}
+
+          {/* Right box */}
+          {props.choirvideo ? (
+            <Grid item xs={12} sm={6}>
+              <Typography variant="h4" component="h4" className={classes.title}>
+                {props.singingtitle}
+              </Typography>
+              <div className={classes.player}>
+                <Player
+                  fluid={false}
+                  className={classes.videoPlayer}
+                  width={"100%"}
+                >
+                  <source src={props.singingvideo} />
+                </Player>
+              </div>
+            </Grid>
+          ) : (
+            ""
+          )}
         </Grid>
       </ScrollAnimation>
     </div>

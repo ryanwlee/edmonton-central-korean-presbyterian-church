@@ -11,6 +11,7 @@ import audioSpinner from "./svg/audio.svg";
 
 const videoUrlPrefix = "https://edmontoncc.net/media/sermon/";
 
+// css styles
 const useStyles = makeStyles(theme => ({
   content: {
     display: "flex",
@@ -81,6 +82,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+// clickable expansions
 const ExpansionPanel = withStyles({
   root: {
     border: "1px solid rgba(0, 0, 0, .125)",
@@ -98,6 +100,7 @@ const ExpansionPanel = withStyles({
   expanded: {}
 })(MuiExpansionPanel);
 
+// clickable expansions
 const ExpansionPanelSummary = withStyles({
   root: {
     backgroundColor: "rgba(0, 0, 0, .03)",
@@ -122,12 +125,9 @@ const ExpansionPanelDetails = withStyles(theme => ({
   }
 }))(MuiExpansionPanelDetails);
 
+// get list of sermon videos from php server / db
 async function fetchData() {
   const url = process.env.REACT_APP_API_SERVER_URL_SERMONS;
-  // const response = await fetch("https://edmontoncc.net/db/sermons.json");
-  // const result = await response.json();
-  // console.log(result);
-
   const response = await fetch(url);
   const result = await response.json();
   console.log(result);
@@ -146,6 +146,7 @@ async function fetchData() {
   return result.data;
 }
 
+// Special sermon page you can watch previous sermons
 function SermonPage({ setScreen }) {
   const classes = useStyles();
   const player = useRef(null);
@@ -155,8 +156,10 @@ function SermonPage({ setScreen }) {
   const initState = {
     sermons: []
   };
+  // hook to set list of sermon videos
   const [sermons, setSermons] = useState(initState.sermons);
 
+  // fetch list of sermon videos from php server / db and set it as a state
   useEffect(() => {
     async function getSermons() {
       const result = await fetchData();
@@ -164,12 +167,12 @@ function SermonPage({ setScreen }) {
         setCurVideo(result[0].src);
         setExpanded(result[0].sermondate);
         setSermons(result);
-        console.log(result[0].content.split("0x4E"));
       }
     }
     getSermons();
   }, []);
 
+  // Set current video when clicked
   const handleChange = panel => (event, newExpanded) => {
     if (panel.src !== curVideo) {
       player.current.video.pause();
@@ -187,6 +190,8 @@ function SermonPage({ setScreen }) {
         </Typography>
         <Divider />
       </div>
+
+      {/* Video box */}
       <div className={classes.sermonContainer}>
         {sermons && sermons.length > 0 ? (
           <Player
@@ -201,6 +206,8 @@ function SermonPage({ setScreen }) {
         ) : (
           ""
         )}
+
+        {/* Sermon list box */}
         <div className={classes.videoPlaylist}>
           {sermons && sermons.length > 0
             ? sermons.map(video => {

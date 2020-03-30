@@ -10,6 +10,7 @@ import { HashLink as Link } from "react-router-hash-link";
 
 const drawerWidth = 240;
 
+// css styles
 const useStyles = makeStyles(theme => ({
   menu: {
     display: "flex",
@@ -23,14 +24,17 @@ const useStyles = makeStyles(theme => ({
   },
   link: {
     margin: theme.spacing(1),
-    color: grey[700]
+    color: grey[600],
+    textDecoration: "none"
   },
   selectedLink: {
     margin: theme.spacing(1),
-    color: grey[800]
+    color: grey[800],
+    textDecoration: "none"
   }
 }));
 
+// drawer
 function Menu(current) {
   const classes = useStyles();
 
@@ -38,14 +42,14 @@ function Menu(current) {
     current.toggleDrawer("left", false)({});
   };
 
+  console.log(current.current);
+
   return (
     <div className={classes.menu}>
       <Link
         to={"/"}
         className={
-          current.current === "monthlyverse"
-            ? classes.selectedLink
-            : classes.link
+          current.current === "header" ? classes.selectedLink : classes.link
         }
         onClick={() => onClick()}
       >

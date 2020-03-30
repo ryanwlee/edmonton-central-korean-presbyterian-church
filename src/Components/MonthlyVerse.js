@@ -5,6 +5,7 @@ import grey from "@material-ui/core/colors/grey";
 import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.min.css";
 
+// css styles
 const useStyles = makeStyles(theme => ({
   root: {
     marginLeft: "auto",
@@ -20,6 +21,7 @@ const useStyles = makeStyles(theme => ({
   from: { marginTop: "30px" }
 }));
 
+// Monthly verse section
 function MonthlyVerse(props) {
   const classes = useStyles();
 

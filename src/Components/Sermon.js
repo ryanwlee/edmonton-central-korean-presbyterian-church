@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { Player } from "video-react";
 import "./Video.css";
 
+// css styles
 const useStyles = makeStyles(theme => ({
   root: {
     marginLeft: "auto",
@@ -53,6 +54,7 @@ async function fetchData() {
   return result.data[0];
 }
 
+// Sermon section in main page
 function Sermon() {
   const classes = useStyles();
   const initState = {
@@ -80,7 +82,9 @@ function Sermon() {
           </Typography>
           <Divider />
         </div>
+        {/* Use grid to render two boxes for large screen, one box for small screen */}
         <Grid container spacing={3}>
+          {/* Left box */}
           <Grid item xs={12} sm={6}>
             <Typography
               variant="h4"
@@ -101,6 +105,7 @@ function Sermon() {
               )}
             </div>
           </Grid>
+          {/* Right box */}
           {sermon ? (
             <Grid item xs={12} sm={6}>
               <Typography variant="h4" component="h4" className={classes.title}>

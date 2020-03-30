@@ -8,6 +8,7 @@ import "./Gallery.css";
 import Swiper from "react-id-swiper";
 import { sortResult } from "./helper";
 
+// css styles
 const useStyles = makeStyles(theme => ({
   root: {
     marginLeft: "auto",
@@ -32,10 +33,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+// Fetch list of photos src urls from php server / db
 async function fetchData() {
   const url = process.env.REACT_APP_API_SERVER_URL_GALLERY;
   const response = await fetch(url);
   const result = await response.json();
+  // Use helper function to sort the result
   const sortedResult = sortResult(result);
 
   console.log(sortedResult);
@@ -47,8 +50,10 @@ function Gallery() {
   const initState = {
     images: []
   };
+  // Hook to save a list of photos
   const [images, setImages] = useState(initState.images);
 
+  // Initialize hook to get a list of photos and put them in a state
   useEffect(() => {
     async function getNews() {
       const result = await fetchData();
@@ -57,6 +62,7 @@ function Gallery() {
     getNews();
   }, []);
 
+  // params for Swiper
   const params = {
     pagination: {
       el: ".swiper-pagination",
@@ -74,11 +80,12 @@ function Gallery() {
           </Typography>
           <Divider />
         </div>
+        {/* Render images by mapping */}
         {images && images.length > 0 ? (
           <div className={classes.gallery}>
             <Swiper {...params}>
               {images.map(img => {
-                return <img src={`${img.src}`} alt="img" />;
+                return <img src={`${img.src}`} alt="img" key={img.src} />;
               })}
             </Swiper>
           </div>

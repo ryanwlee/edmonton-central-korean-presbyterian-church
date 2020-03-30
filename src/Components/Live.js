@@ -5,6 +5,7 @@ import grey from "@material-ui/core/colors/grey";
 import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.min.css";
 
+// css styles
 const useStyles = makeStyles(theme => ({
   root: {
     marginLeft: "auto",
@@ -45,6 +46,7 @@ function Live(props) {
           </Typography>
           <Divider />
         </div>
+        {/* If live youtube channel name is available, render iframe */}
         {props.youtubeChannel ? (
           <iframe
             src={`https://www.youtube.com/embed/live_stream?channel=${props.youtubeChannel}&
@@ -57,13 +59,14 @@ function Live(props) {
             }}
             enablejsapi="1"
             enablecastapi="1"
-            frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
+            allowFullScreen
           ></iframe>
         ) : (
           ""
         )}
+
+        {/* Description of live broadcast */}
         <div className={classes.desc}>
           <Typography variant="h5" display="block" gutterBottom>
             Live 방송 일정
@@ -77,6 +80,8 @@ function Live(props) {
           <Typography variant="body1" display="block" gutterBottom>
             청년부 예배: 토요일 저녁 6시 30분
           </Typography>
+
+          {/* Link to youtube */}
           {props.youtubeChannel ? (
             <Link
               href={`https://www.youtube.com/channel/${props.youtubeChannel}/live`}

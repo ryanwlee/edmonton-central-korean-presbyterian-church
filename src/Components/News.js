@@ -6,6 +6,7 @@ import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.min.css";
 import { sortResult } from "./helper";
 
+// css styles
 const useStyles = makeStyles(theme => ({
   root: {
     marginLeft: "auto",
@@ -66,6 +67,7 @@ async function fetchData() {
   return final;
 }
 
+// News and event section
 function News() {
   const classes = useStyles();
   const initState = {
@@ -93,7 +95,9 @@ function News() {
           </Typography>
           <Divider />
         </div>
+        {/* Use grid to render two boxes for large screen, one box for small screen */}
         <Grid container spacing={3}>
+          {/* Left box */}
           <Grid item xs={12} sm={6} className={classes.contentContainer}>
             <Typography variant="h4" component="h4" className={classes.title}>
               ECKPC NEWS
@@ -116,6 +120,7 @@ function News() {
               </ul>
             </Typography>
           </Grid>
+          {/* Right box */}
           <Grid item xs={12} sm={6} className={classes.contentContainer}>
             <Typography variant="h4" component="h4" className={classes.title}>
               모임 및 행사

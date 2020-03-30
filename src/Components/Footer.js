@@ -4,6 +4,7 @@ import { Typography } from "@material-ui/core";
 import grey from "@material-ui/core/colors/grey";
 import "animate.css/animate.min.css";
 
+// css styles
 const useStyles = makeStyles(theme => ({
   root: {
     marginLeft: "auto",
@@ -25,15 +26,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function Footer() {
+function Footer(props) {
   const classes = useStyles();
 
   return (
     <div className={classes.root} id={"footer"}>
       <div className={classes.desc}>
         <Typography variant="body1" display="block" gutterBottom>
-          2551 Ellwood Dr SW, Edmonton, AB, CANADA| Phone: 780-437-6229 | Email:
-          eckpc1988@edmontoncc.net
+          {`${props.address} | Phone: ${props.phone} | Email: ${props.email}`}
         </Typography>
         <Typography variant="body1" display="block" gutterBottom>
           Copyright © 2020 Edmonton Central Korean Presbyterian Church
