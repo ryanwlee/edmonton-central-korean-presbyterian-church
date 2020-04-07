@@ -4,6 +4,7 @@ import { HashRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Menu from "./Components/Menu";
 import Content from "./Components/Content";
 import SermonPage from "./Components/SermonPage";
+import Appmenu from "./Components/Appmenu";
 import MenuIcon from "@material-ui/icons/Menu";
 import { Drawer, IconButton, AppBar, Toolbar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -11,38 +12,42 @@ import HideOnScroll from "./Components/HideOnScroll";
 import grey from "@material-ui/core/colors/grey";
 import Logo from "./Components/img/logo.png";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
   body: {
     display: "flex",
     flexDirection: "column",
-    width: "100%"
+    width: "100%",
   },
   menuButton: {
     marginLeft: "5px",
     height: "50px",
-    zIndex: 100
+    zIndex: 100,
   },
   appbar: {
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
   appbarText: {
-    color: grey[700]
+    color: grey[700],
   },
   menuIcon: {
-    color: grey[700]
+    color: grey[700],
   },
   logo: {
-    marginLeft: "20px",
-    height: "60px"
-  }
+    display: "none",
+    [theme.breakpoints.down("xs")]: {
+      display: "block",
+      marginLeft: "20px",
+      height: "60px",
+    },
+  },
 }));
 
 const initialScreen = {
-  current: "header"
+  current: "header",
 };
 
 function screenReducer(state, action) {
@@ -56,16 +61,16 @@ function screenReducer(state, action) {
 
 function App(props) {
   const [screen, dispatch] = React.useReducer(screenReducer, initialScreen);
-  const setScreen = current => {
+  const setScreen = (current) => {
     dispatch({ type: "focus", current });
   };
 
   const classes = useStyles();
   const [state, setState] = React.useState({
-    left: false
+    left: false,
   });
 
-  const toggleDrawer = (side, open) => event => {
+  const toggleDrawer = (side, open) => (event) => {
     if (
       event &&
       event.type === "keydown" &&
@@ -99,6 +104,7 @@ function App(props) {
                 <Link to={"/"}>
                   <img src={Logo} className={classes.logo} alt={"logo"} />
                 </Link>
+                <Appmenu />
               </Toolbar>
             </AppBar>
           </HideOnScroll>

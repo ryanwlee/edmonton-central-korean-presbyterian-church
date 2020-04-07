@@ -19,7 +19,7 @@ import Spinner from "./svg/grid.svg";
 const headerBackGround = "https://edmontoncc.net/media/photo/본당4-scaled.jpg";
 
 // css styles
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   content: {
     display: "block",
     flexDirection: "column",
@@ -31,8 +31,8 @@ const useStyles = makeStyles(theme => ({
     textAlign: "left",
     fontSize: "1.2rem",
     [theme.breakpoints.down("sm")]: {
-      fontSize: "1rem"
-    }
+      fontSize: "1rem",
+    },
   },
   header: {
     display: "flex",
@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: "left",
     position: "relative",
     marginBottom: "40px",
-    wordBreak: "keep-all"
+    wordBreak: "keep-all",
   },
   background: {
     backgroundImage: `url(${headerBackGround})`,
@@ -57,8 +57,8 @@ const useStyles = makeStyles(theme => ({
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     [theme.breakpoints.down("sm")]: {
-      backgroundAttachment: "scroll"
-    }
+      backgroundAttachment: "scroll",
+    },
   },
   headerTitle1: {
     fontSize: "2rem",
@@ -69,8 +69,8 @@ const useStyles = makeStyles(theme => ({
     zIndex: 100,
     [theme.breakpoints.down("xs")]: {
       marginLeft: "30px",
-      marginRight: "30px"
-    }
+      marginRight: "30px",
+    },
   },
   headerTitle2: {
     fontSize: "3rem",
@@ -82,22 +82,22 @@ const useStyles = makeStyles(theme => ({
     zIndex: 100,
     [theme.breakpoints.down("xs")]: {
       marginLeft: "30px",
-      marginRight: "30px"
-    }
+      marginRight: "30px",
+    },
   },
   LoadingModal: {
     backgroundColor: grey[100],
     textAlign: "center",
-    zIndex: 100
+    zIndex: 100,
   },
   Spinner: {
     marginTop: "300px",
-    outline: "none"
+    outline: "none",
   },
   popModal: {
     backgroundColor: grey[10],
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 }));
 
 // get all required information from php server / db
@@ -122,7 +122,7 @@ function Content({ setScreen }) {
     choirtitle: "",
     choirvideo: "",
     singingtitle: "",
-    singingvideo: ""
+    singingvideo: "",
   };
 
   // hook for setting information from php server / db
@@ -132,6 +132,7 @@ function Content({ setScreen }) {
   useEffect(() => {
     async function getSetting() {
       const result = await fetchData();
+      console.log(result);
       setMainsetting(result);
     }
     getSetting();
@@ -235,7 +236,11 @@ function Content({ setScreen }) {
           onClose={setPopHandler}
           className={classes.popModal}
         >
-          <ModalContent handleCookieOff={handleCookieOff} />
+          <ModalContent
+            handleCookieOff={handleCookieOff}
+            content={mainsetting.modalcontent}
+            title={mainsetting.modalcontentheader}
+          />
         </Modal>
       )}
       {/* Main page header */}
@@ -244,7 +249,7 @@ function Content({ setScreen }) {
         offset={{ top: 400, bottom: 400 }}
         onChange={headerOnChange}
       >
-        <div className={classes.header}>
+        <div className={classes.header} id={"header"}>
           <div className={classes.background}></div>
           <Typography
             variant="h4"

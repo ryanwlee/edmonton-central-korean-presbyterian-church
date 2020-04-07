@@ -8,33 +8,33 @@ import { Player } from "video-react";
 import "./Video.css";
 
 // css styles
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     marginLeft: "auto",
     marginRight: "auto",
     marginTop: "300px",
     width: "85%",
     color: grey[800],
-    wordBreak: "keep-all"
+    wordBreak: "keep-all",
   },
   header: {
     marginLeft: "auto",
     marginRight: "auto",
     width: "200px",
-    textAlign: "center"
+    textAlign: "center",
   },
   title: {
     marginTop: "50px",
-    textAlign: "center"
+    textAlign: "center",
   },
   youtube: {
     marginTop: "50px",
-    height: "400px"
+    height: "400px",
   },
   videoPlayer: {
     marginTop: "50px",
-    height: "500px"
-  }
+    height: "500px",
+  },
 }));
 
 function Media(props) {
@@ -53,7 +53,7 @@ function Media(props) {
         <Grid container spacing={3}>
           {/* Left box */}
           {props.choirvideo ? (
-            <Grid item xs={12} sm={6}>
+            <Grid item sm={12} md={6}>
               <Typography variant="h4" component="h4" className={classes.title}>
                 {props.choirtitle}
               </Typography>
@@ -73,7 +73,7 @@ function Media(props) {
 
           {/* Right box */}
           {props.choirvideo ? (
-            <Grid item xs={12} sm={6}>
+            <Grid item sm={12} md={6}>
               <Typography variant="h4" component="h4" className={classes.title}>
                 {props.singingtitle}
               </Typography>
