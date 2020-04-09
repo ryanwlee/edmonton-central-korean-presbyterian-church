@@ -65,8 +65,8 @@ function Appmenu(current) {
       <Link to={"/#news"} className={classes.link}>
         NEWS
       </Link>
-      <Link to={"/#gallery"} className={classes.link}>
-        GALLERY
+      <Link to={"/*/news"} className={classes.link}>
+        주보
       </Link>
       <ExtLink
         href={

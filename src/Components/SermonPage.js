@@ -12,14 +12,14 @@ import audioSpinner from "./svg/audio.svg";
 const videoUrlPrefix = "https://edmontoncc.net/media/sermon/";
 
 // css styles
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   content: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "left",
     width: "100%",
-    wordBreak: "keep-all"
+    wordBreak: "keep-all",
   },
   header: {
     marginTop: "130px",
@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
     marginLeft: "auto",
     marginRight: "auto",
     width: "200px",
-    textAlign: "center"
+    textAlign: "center",
   },
   sermonContainer: {
     width: "90%",
@@ -39,8 +39,8 @@ const useStyles = makeStyles(theme => ({
     marginBottom: "150px",
     [theme.breakpoints.down("sm")]: {
       width: "100%",
-      flexDirection: "column"
-    }
+      flexDirection: "column",
+    },
   },
   videoPlaylist: {
     minWidth: "400px",
@@ -49,37 +49,37 @@ const useStyles = makeStyles(theme => ({
     overflow: "scroll",
     [theme.breakpoints.down("sm")]: {
       width: "100%",
-      minWidth: "100%"
+      minWidth: "100%",
     },
     [theme.breakpoints.up("lg")]: {
-      height: "700px"
-    }
+      height: "700px",
+    },
   },
   videoPlayer: {
     margin: "auto",
     outline: "none",
     height: "550px",
     [theme.breakpoints.up("lg")]: {
-      height: "700px"
-    }
+      height: "700px",
+    },
   },
   videoTitle: {
     marginTop: "auto",
     marginBottom: "auto",
     fontSize: "1.1rem",
-    whiteSpace: "pre-wrap"
+    whiteSpace: "pre-wrap",
   },
   videoDescription: {
     fontSize: "0.9rem",
-    whiteSpace: "pre-wrap"
+    whiteSpace: "pre-wrap",
   },
   Spinner: {
     marginTop: "auto",
     marginBottom: "5px",
     marginLeft: "15px",
     height: "24px",
-    outline: "none"
-  }
+    outline: "none",
+  },
 }));
 
 // clickable expansions
@@ -88,16 +88,16 @@ const ExpansionPanel = withStyles({
     border: "1px solid rgba(0, 0, 0, .125)",
     boxShadow: "none",
     "&:not(:last-child)": {
-      borderBottom: 0
+      borderBottom: 0,
     },
     "&:before": {
-      display: "none"
+      display: "none",
     },
     "&$expanded": {
-      margin: "auto"
-    }
+      margin: "auto",
+    },
   },
-  expanded: {}
+  expanded: {},
 })(MuiExpansionPanel);
 
 // clickable expansions
@@ -108,21 +108,21 @@ const ExpansionPanelSummary = withStyles({
     marginBottom: -1,
     minHeight: 56,
     "&$expanded": {
-      minHeight: 56
-    }
+      minHeight: 56,
+    },
   },
   content: {
     "&$expanded": {
-      margin: "12px 0"
-    }
+      margin: "12px 0",
+    },
   },
-  expanded: {}
+  expanded: {},
 })(MuiExpansionPanelSummary);
 
-const ExpansionPanelDetails = withStyles(theme => ({
+const ExpansionPanelDetails = withStyles((theme) => ({
   root: {
-    padding: theme.spacing(2)
-  }
+    padding: theme.spacing(2),
+  },
 }))(MuiExpansionPanelDetails);
 
 // get list of sermon videos from php server / db
@@ -132,7 +132,7 @@ async function fetchData() {
   const result = await response.json();
   console.log(result);
   if (result.data && result.data.length > 0) {
-    result.data.sort(function(a, b) {
+    result.data.sort(function (a, b) {
       if (a.sermondate > b.sermondate) {
         return -1;
       }
@@ -146,6 +146,15 @@ async function fetchData() {
   return result.data;
 }
 
+// get mainsetting
+async function fetchMainData() {
+  const url = process.env.REACT_APP_API_SERVER_URL_MAINSETTING;
+  const response = await fetch(url);
+  const result = await response.json();
+  console.log(result);
+  return result.data[0];
+}
+
 // Special sermon page you can watch previous sermons
 function SermonPage({ setScreen }) {
   const classes = useStyles();
@@ -154,7 +163,7 @@ function SermonPage({ setScreen }) {
   const [expanded, setExpanded] = React.useState("");
 
   const initState = {
-    sermons: []
+    sermons: [],
   };
   // hook to set list of sermon videos
   const [sermons, setSermons] = useState(initState.sermons);
@@ -172,8 +181,35 @@ function SermonPage({ setScreen }) {
     getSermons();
   }, []);
 
+  const initStateMain = {
+    monthlyversetitle: "",
+    monthlyversesecondtitle: "",
+    monthlyverse: "",
+    liveyoutubechannel: "",
+    choirtitle: "",
+    choirvideo: "",
+    singingtitle: "",
+    singingvideo: "",
+    modalcontent: "",
+    modalcontentheader: "",
+    jubo: "",
+  };
+
+  // hook for setting information from php server / db
+  const [mainsetting, setMainsetting] = useState(initStateMain);
+
+  // initialize hook to get setting information from php server / db
+  useEffect(() => {
+    async function getSetting() {
+      const result = await fetchMainData();
+      console.log(result);
+      setMainsetting(result);
+    }
+    getSetting();
+  }, []);
+
   // Set current video when clicked
-  const handleChange = panel => (event, newExpanded) => {
+  const handleChange = (panel) => (event, newExpanded) => {
     if (panel.src !== curVideo) {
       player.current.video.pause();
       setCurVideo(panel.src);
@@ -210,7 +246,7 @@ function SermonPage({ setScreen }) {
         {/* Sermon list box */}
         <div className={classes.videoPlaylist}>
           {sermons && sermons.length > 0
-            ? sermons.map(video => {
+            ? sermons.map((video) => {
                 return (
                   <ExpansionPanel
                     square
@@ -248,7 +284,11 @@ function SermonPage({ setScreen }) {
             : ""}
         </div>
       </div>
-      <Footer />
+      <Footer
+        phone={mainsetting.phone}
+        email={mainsetting.email}
+        address={mainsetting.address}
+      />
     </div>
   );
 }

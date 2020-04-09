@@ -56,17 +56,6 @@ function Menu(current) {
         HOME
       </Link>
       <Link
-        to={"/#monthlyverse"}
-        className={
-          current.current === "monthlyverse"
-            ? classes.selectedLink
-            : classes.link
-        }
-        onClick={() => onClick()}
-      >
-        요절 말씀
-      </Link>
-      <Link
         to={"/#live"}
         className={
           current.current === "live" ? classes.selectedLink : classes.link
@@ -101,6 +90,9 @@ function Menu(current) {
         onClick={() => onClick()}
       >
         NEWS
+      </Link>
+      <Link to={"/*/news"} className={classes.link}>
+        주보
       </Link>
       <Link
         to={"/#gallery"}

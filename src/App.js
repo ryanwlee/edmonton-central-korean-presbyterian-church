@@ -4,6 +4,7 @@ import { HashRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Menu from "./Components/Menu";
 import Content from "./Components/Content";
 import SermonPage from "./Components/SermonPage";
+import JuboPage from "./Components/JuboPage";
 import Appmenu from "./Components/Appmenu";
 import MenuIcon from "@material-ui/icons/Menu";
 import { Drawer, IconButton, AppBar, Toolbar } from "@material-ui/core";
@@ -112,6 +113,9 @@ function App(props) {
             <Switch>
               <Route path="/*/sermon">
                 <SermonPage />
+              </Route>
+              <Route path="/*/news">
+                <JuboPage />
               </Route>
               <Route path="/">
                 <Content setScreen={setScreen} />

@@ -5,41 +5,48 @@ import grey from "@material-ui/core/colors/grey";
 import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.min.css";
 import { sortResult } from "./helper";
+import { Link } from "react-router-dom";
 
 // css styles
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     marginLeft: "auto",
     marginRight: "auto",
     marginTop: "300px",
     width: "85%",
     color: grey[800],
-    wordBreak: "keep-all"
+    wordBreak: "keep-all",
   },
   header: {
     marginLeft: "auto",
     marginRight: "auto",
     width: "200px",
     marginBottom: "50px",
-    textAlign: "center"
+    textAlign: "center",
   },
   title: {
     marginTop: "50px",
     textAlign: "center",
-    whiteSpace: "pre-wrap"
+    whiteSpace: "pre-wrap",
   },
   content: {
     marginTop: "50px",
     fontSize: "1rem",
-    whiteSpace: "pre-wrap"
+    whiteSpace: "pre-wrap",
   },
   li: {
     marginBottom: "10px",
     zIndex: 100,
     color: grey[800],
-    whiteSpace: "pre-wrap"
+    whiteSpace: "pre-wrap",
   },
-  contentContainer: { position: "relative", whiteSpace: "pre-wrap" }
+  contentContainer: { position: "relative", whiteSpace: "pre-wrap" },
+  link: {
+    color: grey[800],
+    fontSize: "1rem",
+    textAlign: "center",
+    marginTop: "25px",
+  },
 }));
 
 async function fetchData() {
@@ -61,7 +68,7 @@ async function fetchData() {
 
   const final = {
     news: sortedNewsResult.data,
-    events: sortedEventsResult.data
+    events: sortedEventsResult.data,
   };
 
   return final;
@@ -72,7 +79,7 @@ function News() {
   const classes = useStyles();
   const initState = {
     news: [],
-    event: []
+    event: [],
   };
   const [news, setNews] = useState(initState.news);
   const [event, setEvent] = useState(initState.event);
@@ -110,7 +117,7 @@ function News() {
             >
               <ul>
                 {news && news.length > 0
-                  ? news.map(n => (
+                  ? news.map((n) => (
                       <li
                         className={classes.li}
                         key={n.listorder}
@@ -133,7 +140,7 @@ function News() {
             >
               <ul>
                 {event && event.length > 0
-                  ? event.map(e => (
+                  ? event.map((e) => (
                       <li className={classes.li} key={e.listorder}>
                         {`${e.content}`}
                       </li>
@@ -143,6 +150,16 @@ function News() {
             </Typography>
           </Grid>
         </Grid>
+        <Link to={"/*/news"}>
+          <Typography
+            variant="caption"
+            display="block"
+            gutterBottom
+            className={classes.link}
+          >
+            이번주 주보 보기...
+          </Typography>
+        </Link>
       </ScrollAnimation>
     </div>
   );
