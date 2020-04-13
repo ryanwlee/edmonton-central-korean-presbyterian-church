@@ -91,7 +91,7 @@ function Menu(current) {
       >
         NEWS
       </Link>
-      <Link to={"/*/news"} className={classes.link}>
+      <Link to={"/*/news"} className={classes.link} onClick={() => onClick()}>
         주보
       </Link>
       <Link

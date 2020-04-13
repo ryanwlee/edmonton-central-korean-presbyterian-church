@@ -1,7 +1,31 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Divider } from "@material-ui/core";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { Typography, Divider, ExpansionPanel } from "@material-ui/core";
+import MuiExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import Img from "react-image";
+import GetAppIcon from "@material-ui/icons/GetApp";
+import grey from "@material-ui/core/colors/grey";
+
 import Footer from "./Footer";
+
+// clickable expansions
+const ExpansionPanelSummary = withStyles({
+  root: {
+    backgroundColor: "rgba(0, 0, 0, .03)",
+    borderBottom: "1px solid rgba(0, 0, 0, .125)",
+    marginBottom: -1,
+    minHeight: 56,
+    "&$expanded": {
+      minHeight: 56,
+    },
+  },
+  content: {
+    "&$expanded": {
+      margin: "12px 0",
+    },
+  },
+  expanded: {},
+})(MuiExpansionPanelSummary);
 
 // css styles
 const useStyles = makeStyles((theme) => ({
@@ -22,22 +46,53 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
   },
   juboContainer: {
-    width: "80%",
+    width: "90%",
     maxWidth: "1400px",
     marginLeft: "auto",
     marginRight: "auto",
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "row",
     marginBottom: "150px",
     [theme.breakpoints.down("sm")]: {
       width: "100%",
-      flexDirection: "column",
+      flexDirection: "column-reverse",
     },
   },
-  jubo: {
+  jubo: {},
+  juboList: {
+    minWidth: "300px",
+    maxWidth: "300px",
+    height: "550px",
+    overflow: "scroll",
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
+      minWidth: "100%",
+    },
+    [theme.breakpoints.up("lg")]: {
+      height: "700px",
+    },
+  },
+  juboTitle: {
+    marginTop: "auto",
+    marginBottom: "auto",
+    fontSize: "1.1rem",
+    whiteSpace: "pre-wrap",
+  },
+  selectedJuboTitle: {
+    marginTop: "auto",
+    marginBottom: "auto",
+    fontSize: "1.1rem",
+    whiteSpace: "pre-wrap",
+    fontWeight: 600,
+  },
+  juboImg: {
     width: "100%",
-    height: "100%",
+    height: "auto",
     objectFit: "contain",
+  },
+  downIcon: {
+    marginLeft: "15px",
+    color: grey[500],
   },
 }));
 
@@ -48,6 +103,26 @@ async function fetchData() {
   const result = await response.json();
   console.log(result);
   return result.data[0];
+}
+
+// get jubo
+async function fetchJuboData() {
+  const url = process.env.REACT_APP_API_SERVER_URL_JUBO;
+  const response = await fetch(url);
+  const result = await response.json();
+  console.log(result);
+  if (result.data && result.data.length > 0) {
+    result.data.sort(function (a, b) {
+      if (a.jubodate > b.jubodate) {
+        return -1;
+      }
+      if (b.jubodate > a.jubodate) {
+        return 1;
+      }
+      return 0;
+    });
+  }
+  return result.data;
 }
 
 // Jubo page rendering pdf file
@@ -64,21 +139,30 @@ function JuboPage() {
     singingvideo: "",
     modalcontent: "",
     modalcontentheader: "",
-    jubo: "",
   };
+  const juboState = [];
 
   // hook for setting information from php server / db
   const [mainsetting, setMainsetting] = useState(initState);
+  const [jubo, setJubo] = useState(juboState);
+  const [currentJubo, setCurrentJubo] = useState(0);
 
   // initialize hook to get setting information from php server / db
   useEffect(() => {
-    async function getSetting() {
+    async function getData() {
       const result = await fetchData();
-      console.log(result);
+      const juboResult = await fetchJuboData();
+      console.log(result, juboResult);
       setMainsetting(result);
+      setJubo(juboResult);
+      setCurrentJubo(0);
     }
-    getSetting();
+    getData();
   }, []);
+
+  const handleJubo = (index) => {
+    setCurrentJubo(index);
+  };
 
   return (
     <div className={classes.content}>
@@ -88,13 +172,42 @@ function JuboPage() {
         </Typography>
         <Divider />
       </div>
-      {mainsetting.jubo === "" ? (
-        ""
-      ) : (
+      {jubo && jubo.length > 0 ? (
         <div className={classes.juboContainer}>
-          <img src={mainsetting.jubo1} className={classes.jubo} />
-          <img src={mainsetting.jubo2} className={classes.jubo} />
+          <div className={classes.juboList}>
+            {jubo.map((j, index) => {
+              console.log(index);
+              return (
+                <ExpansionPanel square expanded={false} key={j.jobodate}>
+                  <ExpansionPanelSummary
+                    aria-controls="panel1d-content"
+                    id="panel1d-header"
+                    onClick={() => handleJubo(index)}
+                  >
+                    <Typography
+                      className={
+                        index === currentJubo
+                          ? classes.selectedJuboTitle
+                          : classes.juboTitle
+                      }
+                    >
+                      {j.jubotitle}
+                    </Typography>
+                    <a href={j.jubopdf}>
+                      <GetAppIcon className={classes.downIcon} />
+                    </a>
+                  </ExpansionPanelSummary>
+                </ExpansionPanel>
+              );
+            })}
+          </div>
+          <div className={classes.jubo}>
+            <Img src={jubo[currentJubo].page1} className={classes.juboImg} />
+            <Img src={jubo[currentJubo].page2} className={classes.juboImg} />
+          </div>
         </div>
+      ) : (
+        ""
       )}
       <Footer
         phone={mainsetting.phone}

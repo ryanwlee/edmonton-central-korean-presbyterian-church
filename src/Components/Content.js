@@ -123,6 +123,7 @@ function Content({ setScreen }) {
     choirvideo: "",
     singingtitle: "",
     singingvideo: "",
+    modal: 0,
   };
 
   // hook for setting information from php server / db
@@ -228,7 +229,7 @@ function Content({ setScreen }) {
         />
       </Modal>
       {/* If cookie is yes, render pop up */}
-      {cookies.edmontoncc === "yes" && (
+      {mainsetting.modal === "yes" && cookies.edmontoncc === "yes" && (
         <Modal
           aria-labelledby="announcement"
           aria-describedby="announcement-description"

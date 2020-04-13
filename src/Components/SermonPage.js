@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "150px",
     [theme.breakpoints.down("sm")]: {
       width: "100%",
-      flexDirection: "column",
+      flexDirection: "column-reverse",
     },
   },
   videoPlaylist: {
@@ -229,20 +229,6 @@ function SermonPage({ setScreen }) {
 
       {/* Video box */}
       <div className={classes.sermonContainer}>
-        {sermons && sermons.length > 0 ? (
-          <Player
-            ref={player}
-            fluid={false}
-            autoPlay
-            className={classes.videoPlayer}
-            width={"100%"}
-          >
-            <source src={videoUrlPrefix + curVideo} />
-          </Player>
-        ) : (
-          ""
-        )}
-
         {/* Sermon list box */}
         <div className={classes.videoPlaylist}>
           {sermons && sermons.length > 0
@@ -283,6 +269,19 @@ function SermonPage({ setScreen }) {
               })
             : ""}
         </div>
+        {sermons && sermons.length > 0 ? (
+          <Player
+            ref={player}
+            fluid={false}
+            autoPlay
+            className={classes.videoPlayer}
+            width={"100%"}
+          >
+            <source src={videoUrlPrefix + curVideo} />
+          </Player>
+        ) : (
+          ""
+        )}
       </div>
       <Footer
         phone={mainsetting.phone}
