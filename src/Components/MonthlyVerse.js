@@ -6,19 +6,19 @@ import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.min.css";
 
 // css styles
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     marginLeft: "auto",
     marginRight: "auto",
-    marginTop: "40px",
+    marginTop: "80px",
     width: "90%",
     color: grey[800],
-    wordBreak: "keep-all"
+    wordBreak: "keep-all",
   },
-  card: { padding: "40px 40px 40px 40px" },
+  card: { padding: "80px 40px 80px 40px" },
   title: {},
   verse: { marginTop: "30px" },
-  from: { marginTop: "30px" }
+  from: { marginTop: "30px" },
 }));
 
 // Monthly verse section

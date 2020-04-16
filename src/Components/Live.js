@@ -6,32 +6,40 @@ import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.min.css";
 
 // css styles
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     marginLeft: "auto",
     marginRight: "auto",
     marginTop: "300px",
     width: "85%",
     color: grey[800],
-    wordBreak: "keep-all"
+    wordBreak: "keep-all",
   },
   live: {
     width: "100%",
-    height: "500px"
+    height: "500px",
   },
   header: {
     marginLeft: "auto",
     marginRight: "auto",
     width: "200px",
     marginBottom: "50px",
-    textAlign: "center"
+    textAlign: "center",
+  },
+  title: {
+    marginBottom: "40px",
+    marginTop: "40px",
   },
   desc: {
     fontSize: "1rem",
-    marginTop: "30px",
+    marginBottomsa: "30px",
     textAlign: "center",
-    marginBottom: "60px"
-  }
+    marginBottom: "60px",
+    whiteSpace: "pre-wrap",
+  },
+  detail: {
+    marginBottom: "40px",
+  },
 }));
 
 function Live(props) {
@@ -55,7 +63,7 @@ function Live(props) {
               border: 0,
               width: "100%",
               height: "auto",
-              minHeight: "500px"
+              minHeight: "500px",
             }}
             enablejsapi="1"
             enablecastapi="1"
@@ -68,17 +76,21 @@ function Live(props) {
 
         {/* Description of live broadcast */}
         <div className={classes.desc}>
-          <Typography variant="h5" display="block" gutterBottom>
+          <Typography
+            variant="h5"
+            display="block"
+            gutterBottom
+            className={classes.title}
+          >
             Live 방송 일정
           </Typography>
-          <Typography variant="body1" display="block" gutterBottom>
-            주일 예배: 오전 11시
-          </Typography>
-          <Typography variant="body1" display="block" gutterBottom>
-            수요 예배: 저녁 7시 30분
-          </Typography>
-          <Typography variant="body1" display="block" gutterBottom>
-            청년부 예배: 토요일 저녁 6시 30분
+          <Typography
+            variant="body1"
+            display="block"
+            gutterBottom
+            className={classes.detail}
+          >
+            {props.liveinfo}
           </Typography>
 
           {/* Link to youtube */}

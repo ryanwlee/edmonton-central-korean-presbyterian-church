@@ -119,6 +119,7 @@ function Content({ setScreen }) {
     monthlyversesecondtitle: "",
     monthlyverse: "",
     liveyoutubechannel: "",
+    liveinfo: "",
     choirtitle: "",
     choirvideo: "",
     singingtitle: "",
@@ -288,7 +289,10 @@ function Content({ setScreen }) {
         offset={{ top: 460, bottom: 300 }}
         onChange={liveOnChange}
       >
-        <Live youtubeChannel={mainsetting.liveyoutubechannel} />
+        <Live
+          youtubeChannel={mainsetting.liveyoutubechannel}
+          liveinfo={mainsetting.liveinfo}
+        />
       </VizSensor>
 
       {/* Sermon section */}
