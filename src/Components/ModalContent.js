@@ -4,6 +4,8 @@ import { Typography } from "@material-ui/core";
 import red from "@material-ui/core/colors/red";
 import grey from "@material-ui/core/colors/grey";
 import ReactHtmlParser from "react-html-parser";
+import { fontFamily, fontMiddle, fontSmall } from "./Constants";
+import CloseIcon from "@material-ui/icons/Close";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -13,19 +15,23 @@ const useStyles = makeStyles((theme) => ({
     overflow: "scroll",
     marginLeft: "auto",
     marginRight: "auto",
-    marginTop: "50px",
+    marginTop: "60px",
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(8, 7, 8),
+    padding: theme.spacing(6, 7, 8),
     outline: "none",
-    [theme.breakpoints.down("xs")]: {
-      width: "250px",
-      marginLeft: "auto",
-      marginRight: "auto",
+    borderRadius: "15px",
+    [theme.breakpoints.down("sm")]: {
+      width: "70%",
       marginTop: "40px",
+      height: "600px",
+      padding: theme.spacing(3, 3, 5),
+    },
+    [theme.breakpoints.down("xs")]: {
       height: "400px",
-      padding: theme.spacing(5, 4, 5),
+      width: "85%",
+      padding: theme.spacing(3, 2, 5),
     },
   },
   indent: {
@@ -40,9 +46,10 @@ const useStyles = makeStyles((theme) => ({
     wordBreak: "keep-all",
     marginTop: "30px",
     textAlign: "left",
-    fontSize: "1.2rem",
     color: grey[800],
     whiteSpace: "pre-wrap",
+    fontFamily: fontFamily,
+    fontSize: fontSmall,
     "& a": {
       color: red[700],
     },
@@ -51,12 +58,13 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   headerTitle1: {
-    fontSize: "2rem",
     color: grey[800],
     marginLeft: "auto",
     marginRight: "auto",
     wordBreak: "keep-all",
     zIndex: 100,
+    fontFamily: fontFamily,
+    fontSize: fontMiddle,
     [theme.breakpoints.down("xs")]: {
       marginLeft: "30px",
       marginRight: "30px",
@@ -67,12 +75,18 @@ const useStyles = makeStyles((theme) => ({
   },
   click: {
     cursor: "pointer",
-    fontSize: "1.2rem",
     marginTop: "40px",
+    fontFamily: fontFamily,
+    fontSize: fontSmall,
     [theme.breakpoints.down("sm")]: {
       fontSize: "1rem",
     },
   },
+  iconContainer: {
+    textAlign: "right",
+    width: "100%",
+  },
+  icon: { width: "30px", cursor: "pointer" },
 }));
 
 // special modal pop up for corona event
@@ -81,6 +95,9 @@ function ModalContent(props) {
 
   return (
     <div className={classes.paper}>
+      <div className={classes.iconContainer}>
+        <CloseIcon className={classes.icon} onClick={props.setPopHandler} />
+      </div>
       <Typography variant="h4" component="h4" className={classes.headerTitle1}>
         {ReactHtmlParser(props.title)}
       </Typography>

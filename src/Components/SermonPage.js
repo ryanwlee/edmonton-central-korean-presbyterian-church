@@ -8,6 +8,7 @@ import Footer from "./Footer";
 import { Player } from "video-react";
 import "./Video.css";
 import audioSpinner from "./svg/audio.svg";
+import { fontFamily, fontXBig, fontSmall } from "./Constants";
 
 const videoUrlPrefix = "https://edmontoncc.net/media/sermon/";
 
@@ -26,8 +27,12 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "40px",
     marginLeft: "auto",
     marginRight: "auto",
-    width: "200px",
+    width: "300px",
     textAlign: "center",
+  },
+  headerTitle: {
+    fontFamily: fontFamily,
+    fontSize: fontXBig,
   },
   sermonContainer: {
     width: "90%",
@@ -47,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "600px",
     height: "550px",
     overflow: "scroll",
+    overflowY: "scroll",
     [theme.breakpoints.down("sm")]: {
       width: "100%",
       minWidth: "100%",
@@ -66,11 +72,13 @@ const useStyles = makeStyles((theme) => ({
   videoTitle: {
     marginTop: "auto",
     marginBottom: "auto",
-    fontSize: "1.1rem",
+    fontFamily: fontFamily,
+    fontSize: fontSmall,
     whiteSpace: "pre-wrap",
   },
   videoDescription: {
-    fontSize: "0.9rem",
+    fontFamily: fontFamily,
+    fontSize: fontSmall,
     whiteSpace: "pre-wrap",
   },
   Spinner: {
@@ -174,7 +182,7 @@ function SermonPage({ setScreen }) {
       const result = await fetchData();
       if (result && result.length > 0) {
         setCurVideo(result[0].src);
-        setExpanded(result[0].sermondate);
+        setExpanded(false);
         setSermons(result);
       }
     }
@@ -221,7 +229,7 @@ function SermonPage({ setScreen }) {
   return (
     <div className={classes.content}>
       <div className={classes.header}>
-        <Typography variant="h3" component="h3">
+        <Typography variant="h3" component="h3" className={classes.headerTitle}>
           SERMON
         </Typography>
         <Divider />

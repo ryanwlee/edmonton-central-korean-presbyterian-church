@@ -5,6 +5,7 @@ import MuiExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Img from "react-image";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import grey from "@material-ui/core/colors/grey";
+import { fontFamily, fontXBig, fontSmall } from "./Constants";
 
 import Footer from "./Footer";
 
@@ -42,8 +43,12 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "40px",
     marginLeft: "auto",
     marginRight: "auto",
-    width: "200px",
+    width: "300px",
     textAlign: "center",
+  },
+  headerTitle: {
+    fontFamily: fontFamily,
+    fontSize: fontXBig,
   },
   juboContainer: {
     width: "90%",
@@ -75,13 +80,15 @@ const useStyles = makeStyles((theme) => ({
   juboTitle: {
     marginTop: "auto",
     marginBottom: "auto",
-    fontSize: "1.1rem",
+    fontFamily: fontFamily,
+    fontSize: fontSmall,
     whiteSpace: "pre-wrap",
   },
   selectedJuboTitle: {
     marginTop: "auto",
     marginBottom: "auto",
-    fontSize: "1.1rem",
+    fontFamily: fontFamily,
+    fontSize: fontSmall,
     whiteSpace: "pre-wrap",
     fontWeight: 600,
   },
@@ -167,7 +174,7 @@ function JuboPage() {
   return (
     <div className={classes.content}>
       <div className={classes.header}>
-        <Typography variant="h3" component="h3">
+        <Typography variant="h3" component="h3" className={classes.headerTitle}>
           주보
         </Typography>
         <Divider />

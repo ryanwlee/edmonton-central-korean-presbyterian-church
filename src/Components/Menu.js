@@ -7,6 +7,7 @@ import CallIcon from "@material-ui/icons/Call";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import ExtLink from "@material-ui/core/Link";
 import { HashLink as Link } from "react-router-hash-link";
+import { fontFamily, fontSmall } from "./Constants";
 
 const drawerWidth = 240;
 
@@ -26,11 +27,15 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     color: grey[600],
     textDecoration: "none",
+    fontFamily: fontFamily,
+    fontSize: fontSmall,
   },
   selectedLink: {
     margin: theme.spacing(1),
     color: grey[800],
     textDecoration: "none",
+    fontFamily: fontFamily,
+    fontSize: fontSmall,
   },
 }));
 

@@ -7,6 +7,7 @@ import CallIcon from "@material-ui/icons/Call";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import ExtLink from "@material-ui/core/Link";
 import { HashLink as Link } from "react-router-hash-link";
+import { fontFamily, fontSmall } from "./Constants";
 
 // css styles
 const useStyles = makeStyles((theme) => ({
@@ -26,6 +27,8 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2),
     color: grey[700],
     textDecoration: "none",
+    fontFamily: fontFamily,
+    fontSize: fontSmall,
     [theme.breakpoints.up("md")]: {
       margin: theme.spacing(3),
     },

@@ -2,10 +2,10 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Grid, Divider } from "@material-ui/core";
 import grey from "@material-ui/core/colors/grey";
-import ScrollAnimation from "react-animate-on-scroll";
 import "animate.css/animate.min.css";
 import { Player } from "video-react";
 import "./Video.css";
+import { fontFamily, fontXBig, fontMiddle } from "./Constants";
 
 // css styles
 const useStyles = makeStyles((theme) => ({
@@ -20,12 +20,18 @@ const useStyles = makeStyles((theme) => ({
   header: {
     marginLeft: "auto",
     marginRight: "auto",
-    width: "200px",
+    width: "300px",
     textAlign: "center",
+  },
+  headerTitle: {
+    fontFamily: fontFamily,
+    fontSize: fontXBig,
   },
   title: {
     marginTop: "50px",
     textAlign: "center",
+    fontFamily: fontFamily,
+    fontSize: fontMiddle,
   },
   youtube: {
     marginTop: "50px",
@@ -35,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "50px",
     height: "500px",
   },
+  playerContainer: { width: "100%" },
 }));
 
 function Media(props) {
@@ -42,56 +49,54 @@ function Media(props) {
 
   return (
     <div className={classes.root} id={"media"}>
-      <ScrollAnimation animateIn="fadeIn" offset={50}>
-        <div className={classes.header}>
-          <Typography variant="h3" component="h3">
-            MEDIA
-          </Typography>
-          <Divider />
-        </div>
-        {/* Use grid to render two boxes for large screen, one box for small screen */}
-        <Grid container spacing={3}>
-          {/* Left box */}
-          {props.choirvideo ? (
-            <Grid item sm={12} md={6}>
-              <Typography variant="h4" component="h4" className={classes.title}>
-                {props.choirtitle}
-              </Typography>
-              <div className={classes.player}>
-                <Player
-                  fluid={false}
-                  className={classes.videoPlayer}
-                  width={"100%"}
-                >
-                  <source src={props.choirvideo} />
-                </Player>
-              </div>
-            </Grid>
-          ) : (
-            ""
-          )}
+      <div className={classes.header}>
+        <Typography variant="h3" component="h3" className={classes.headerTitle}>
+          MEDIA
+        </Typography>
+        <Divider />
+      </div>
+      {/* Use grid to render two boxes for large screen, one box for small screen */}
+      <Grid container spacing={3}>
+        {/* Left box */}
+        {props.choirvideo ? (
+          <Grid item sm={12} md={6} className={classes.playerContainer}>
+            <Typography variant="h4" component="h4" className={classes.title}>
+              {props.choirtitle}
+            </Typography>
+            <div className={classes.player}>
+              <Player
+                fluid={false}
+                className={classes.videoPlayer}
+                width={"100%"}
+              >
+                <source src={props.choirvideo} />
+              </Player>
+            </div>
+          </Grid>
+        ) : (
+          ""
+        )}
 
-          {/* Right box */}
-          {props.choirvideo ? (
-            <Grid item sm={12} md={6}>
-              <Typography variant="h4" component="h4" className={classes.title}>
-                {props.singingtitle}
-              </Typography>
-              <div className={classes.player}>
-                <Player
-                  fluid={false}
-                  className={classes.videoPlayer}
-                  width={"100%"}
-                >
-                  <source src={props.singingvideo} />
-                </Player>
-              </div>
-            </Grid>
-          ) : (
-            ""
-          )}
-        </Grid>
-      </ScrollAnimation>
+        {/* Right box */}
+        {props.choirvideo ? (
+          <Grid item sm={12} md={6} className={classes.playerContainer}>
+            <Typography variant="h4" component="h4" className={classes.title}>
+              {props.singingtitle}
+            </Typography>
+            <div className={classes.player}>
+              <Player
+                fluid={false}
+                className={classes.videoPlayer}
+                width={"100%"}
+              >
+                <source src={props.singingvideo} />
+              </Player>
+            </div>
+          </Grid>
+        ) : (
+          ""
+        )}
+      </Grid>
     </div>
   );
 }

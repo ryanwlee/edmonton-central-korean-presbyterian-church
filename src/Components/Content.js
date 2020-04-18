@@ -14,6 +14,7 @@ import ModalContent from "./ModalContent";
 import VizSensor from "react-visibility-sensor";
 import grey from "@material-ui/core/colors/grey";
 import Spinner from "./svg/grid.svg";
+import { fontFamily, fontXBig, fontBig } from "./Constants";
 
 // main header background src address
 const headerBackGround = "https://edmontoncc.net/media/photo/본당4-scaled.jpg";
@@ -29,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
     wordBreak: "keep-all",
     marginTop: "30px",
     textAlign: "left",
-    fontSize: "1.2rem",
     [theme.breakpoints.down("sm")]: {
       fontSize: "1rem",
     },
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
   background: {
     backgroundImage: `url(${headerBackGround})`,
-    opacity: "40%",
+    filter: "brightness(70%)",
     width: "100%",
     height: "100vh",
     position: "absolute",
@@ -61,25 +61,27 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   headerTitle1: {
-    fontSize: "2rem",
-    color: grey[800],
+    color: grey[100],
     marginLeft: "auto",
     marginRight: "auto",
     wordBreak: "keep-all",
     zIndex: 100,
+    fontFamily: fontFamily,
+    fontSize: fontBig,
     [theme.breakpoints.down("xs")]: {
       marginLeft: "30px",
       marginRight: "30px",
     },
   },
   headerTitle2: {
-    fontSize: "3rem",
-    color: grey[800],
+    color: grey[100],
     marginLeft: "auto",
     marginRight: "auto",
     marginTop: "30px",
     wordBreak: "keep-all",
     zIndex: 100,
+    fontFamily: "Stylish",
+    fontSize: fontXBig,
     [theme.breakpoints.down("xs")]: {
       marginLeft: "30px",
       marginRight: "30px",
@@ -242,6 +244,7 @@ function Content({ setScreen }) {
             handleCookieOff={handleCookieOff}
             content={mainsetting.modalcontent}
             title={mainsetting.modalcontentheader}
+            setPopHandler={setPopHandler}
           />
         </Modal>
       )}
