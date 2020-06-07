@@ -40,6 +40,9 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: fontFamily,
     fontSize: fontSmall,
   },
+  playerContainer: {
+    width: "100%",
+  },
   videoPlayer: {
     marginTop: "50px",
     height: "500px",
@@ -93,12 +96,7 @@ function Sermon() {
       {/* Use grid to render two boxes for large screen, one box for small screen */}
       <Grid container spacing={3}>
         {/* Left box */}
-        <Grid item sm={12} md={6}>
-          <Typography
-            variant="h4"
-            component="h4"
-            className={classes.title}
-          ></Typography>
+        <Grid item sm={12} md={6} className={classes.playerContainer}>
           <div className={classes.player}>
             {sermon && sermon.src !== "" ? (
               <Player

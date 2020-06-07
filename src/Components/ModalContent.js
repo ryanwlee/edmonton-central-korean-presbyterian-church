@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("xs")]: {
       height: "400px",
       width: "85%",
-      padding: theme.spacing(3, 2, 5),
+      padding: theme.spacing(3, 3, 5),
     },
   },
   indent: {

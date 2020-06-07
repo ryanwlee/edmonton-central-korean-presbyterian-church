@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "row",
     backgroundColor: "white",
-    fontWeight: 500,
     [theme.breakpoints.down("xs")]: {
       display: "none",
     },
@@ -29,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
     fontFamily: fontFamily,
     fontSize: fontSmall,
+    fontWeight: 600,
     [theme.breakpoints.up("md")]: {
       margin: theme.spacing(3),
     },

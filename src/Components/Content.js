@@ -68,6 +68,7 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 100,
     fontFamily: fontFamily,
     fontSize: fontBig,
+    fontWeight: 600,
     [theme.breakpoints.down("xs")]: {
       marginLeft: "30px",
       marginRight: "30px",
@@ -80,8 +81,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "30px",
     wordBreak: "keep-all",
     zIndex: 100,
-    fontFamily: "Stylish",
+    fontFamily: fontFamily,
     fontSize: fontXBig,
+    fontWeight: 600,
     [theme.breakpoints.down("xs")]: {
       marginLeft: "30px",
       marginRight: "30px",
