@@ -65,8 +65,8 @@ const useStyles = makeStyles((theme) => ({
   },
   jubo: {},
   juboList: {
-    minWidth: "500px",
-    maxWidth: "500px",
+    minWidth: "420px",
+    maxWidth: "420px",
     height: "550px",
     overflow: "scroll",
     [theme.breakpoints.down("sm")]: {

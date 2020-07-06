@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
-import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Modal } from "@material-ui/core";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { Typography, Modal, Button, Link } from "@material-ui/core";
 import MonthlyVerse from "./MonthlyVerse";
 import Live from "./Live";
 import Sermon from "./Sermon";
@@ -99,9 +99,14 @@ const useStyles = makeStyles((theme) => ({
     outline: "none",
   },
   popModal: {
-    backgroundColor: grey[10],
     textAlign: "center",
   },
+  link: {
+    color: grey[800],
+    textDecoration: "none",
+    fontFamily: fontFamily,
+    margin: "40px auto 0 auto",
+  }
 }));
 
 // get all required information from php server / db
@@ -216,6 +221,20 @@ function Content({ setScreen }) {
     }
   }
 
+  // Color Button
+  const ColorButton = withStyles((theme) => ({
+    root: {
+      color: grey[800],
+      width: "300px",
+      fontSize: "1.5em",
+      fontWeight: "600",
+      backgroundColor: grey[100],
+      '&:hover': {
+        backgroundColor: grey[100],
+      },
+    },
+  }))(Button);
+
   return (
     <div className={classes.content}>
       {/* Loading modal */}
@@ -272,6 +291,8 @@ function Content({ setScreen }) {
           >
             예수를 깊이 생각하라
           </Typography>
+
+          <Link href="https://docs.google.com/forms/d/e/1FAIpQLSeEX_v6qV5qOUN_4BqEwxWXentp6KzMrsJpWqbjoZsz_lwzPA/viewform" className={classes.link}><ColorButton>주일 본당예배 참여 신청서</ColorButton></Link>
         </div>
       </VizSensor>
 

@@ -11,15 +11,14 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     zIndex: 1,
     width: "60%",
-    height: "600px",
-    overflow: "scroll",
     marginLeft: "auto",
     marginRight: "auto",
     marginTop: "60px",
+    height: "600px",
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(6, 7, 8),
+    padding: theme.spacing(6, 1, 8, 7),
     outline: "none",
     borderRadius: "15px",
     [theme.breakpoints.down("sm")]: {
@@ -32,6 +31,17 @@ const useStyles = makeStyles((theme) => ({
       height: "400px",
       width: "85%",
       padding: theme.spacing(3, 3, 5),
+    },
+  },
+  overflow: {
+    overflow: "scroll",
+    overflowX: "hidden",
+    height: "550px",
+    [theme.breakpoints.down("sm")]: {
+      height: "550px",
+    },
+    [theme.breakpoints.down("xs")]: {
+      height: "350px",
     },
   },
   indent: {
@@ -85,8 +95,9 @@ const useStyles = makeStyles((theme) => ({
   iconContainer: {
     textAlign: "right",
     width: "100%",
+    marginBottom: "20px",
   },
-  icon: { width: "30px", cursor: "pointer" },
+  icon: { width: "30px", cursor: "pointer", marginRight: "20px", },
 }));
 
 // special modal pop up for corona event
@@ -98,26 +109,28 @@ function ModalContent(props) {
       <div className={classes.iconContainer}>
         <CloseIcon className={classes.icon} onClick={props.setPopHandler} />
       </div>
-      <Typography variant="h4" component="h4" className={classes.headerTitle1}>
-        {ReactHtmlParser(props.title)}
-      </Typography>
-      <Typography
-        variant="caption"
-        display="block"
-        gutterBottom
-        className={classes.content}
-      >
-        <pre className={classes.content}>{ReactHtmlParser(props.content)}</pre>
-      </Typography>
-      <Typography
-        variant="caption"
-        display="block"
-        gutterBottom
-        className={classes.click}
-        onClick={props.handleCookieOff}
-      >
-        다시 보지 않기
-      </Typography>
+      <div className={classes.overflow}>
+        <Typography variant="h4" component="h4" className={classes.headerTitle1}>
+          {ReactHtmlParser(props.title)}
+        </Typography>
+        <Typography
+          variant="caption"
+          display="block"
+          gutterBottom
+          className={classes.content}
+        >
+          <pre className={classes.content}>{ReactHtmlParser(props.content)}</pre>
+        </Typography>
+        <Typography
+          variant="caption"
+          display="block"
+          gutterBottom
+          className={classes.click}
+          onClick={props.handleCookieOff}
+        >
+          다시 보지 않기
+        </Typography>
+      </div>
     </div>
   );
 }
