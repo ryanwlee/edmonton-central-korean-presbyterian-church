@@ -70,7 +70,7 @@ function Menu(current) {
         LIVE
       </Link>
       <Link
-        to={"/*/sermon"}
+        to={"/sermon"}
         className={
           current.current === "sermon" ? classes.selectedLink : classes.link
         }
@@ -96,7 +96,7 @@ function Menu(current) {
       >
         NEWS
       </Link>
-      <Link to={"/*/news"} className={classes.link} onClick={() => onClick()}>
+      <Link to={"/news"} className={classes.link} onClick={() => onClick()}>
         주보
       </Link>
       <Link
