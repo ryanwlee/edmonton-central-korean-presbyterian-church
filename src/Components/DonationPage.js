@@ -41,6 +41,8 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: "150px",
         [theme.breakpoints.down("sm")]: {
             width: "100%",
+            marginLeft: "10px",
+            marginRight: "10px",
         },
     },
     secondaryHeaderTitle: {
