@@ -11,12 +11,10 @@ import Footer from "./Footer";
 // css styles
 const useStyles = makeStyles((theme) => ({
     content: {
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "left",
-        width: "100%",
-        wordBreak: "keep-all",
+        [theme.breakpoints.down("sm")]: {
+            marginLeft: "10px",
+            marginRight: "10px",
+        },
     },
     header: {
         marginTop: "130px",
@@ -40,9 +38,7 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: "column",
         marginBottom: "150px",
         [theme.breakpoints.down("sm")]: {
-            width: "100%",
-            marginLeft: "10px",
-            marginRight: "10px",
+            width: "90%",
         },
     },
     secondaryHeaderTitle: {
@@ -55,6 +51,9 @@ const useStyles = makeStyles((theme) => ({
         fontSize: fontSmall,
         marginLeft: "30px",
         lineHeight: "1.5em",
+        [theme.breakpoints.down("sm")]: {
+            marginLeft: "0",
+        },
     },
     link: {
         margin: theme.spacing(1),
@@ -84,6 +83,9 @@ const useStyles = makeStyles((theme) => ({
         marginTop: "20px",
         marginLeft: "30px",
         lineHeight: "1.5em",
+        [theme.breakpoints.down("sm")]: {
+            marginLeft: "0",
+        },
     },
 }));
 

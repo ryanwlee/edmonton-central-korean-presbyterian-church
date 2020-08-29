@@ -42,8 +42,9 @@ const useStyles = makeStyles((theme) => ({
         display: "none",
         [theme.breakpoints.down("xs")]: {
             display: "block",
-            marginLeft: "20px",
+            marginLeft: "10px",
             height: "60px",
+            width: "200px",
         },
     },
 }));
