@@ -1,109 +1,109 @@
-import React, { useRef, useState, useEffect } from "react";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
-import { Typography, Divider } from "@material-ui/core";
-import MuiExpansionPanel from "@material-ui/core/ExpansionPanel";
-import MuiExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import MuiExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import Footer from "./Footer";
-import { Player } from "video-react";
-import "./Video.css";
-import audioSpinner from "./svg/audio.svg";
-import { fontFamily, fontXBig, fontSmall } from "./Constants";
+import React, { useRef, useState, useEffect } from 'react';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { Typography, Divider } from '@material-ui/core';
+import MuiExpansionPanel from '@material-ui/core/ExpansionPanel';
+import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import MuiExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import Footer from './Footer';
+import { Player } from 'video-react';
+import './Video.css';
+import audioSpinner from './svg/audio.svg';
+import { fontFamily, fontXBig, fontSmall } from './Constants';
 
-const videoUrlPrefix = "https://edmontoncc.net/media/sermon/";
+const videoUrlPrefix = 'https://edmontoncc.net/media/sermon/';
 
 // css styles
 const useStyles = makeStyles((theme) => ({
     content: {
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "left",
-        width: "100%",
-        wordBreak: "keep-all",
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'left',
+        width: '100%',
+        wordBreak: 'keep-all',
     },
     header: {
-        marginTop: "130px",
-        marginBottom: "40px",
-        marginLeft: "auto",
-        marginRight: "auto",
-        width: "300px",
-        textAlign: "center",
+        marginTop: '130px',
+        marginBottom: '40px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        width: '300px',
+        textAlign: 'center',
     },
     headerTitle: {
         fontFamily: fontFamily,
         fontSize: fontXBig,
-        marginTop: "20px",
+        marginTop: '20px',
     },
     sermonContainer: {
-        width: "90%",
-        maxWidth: "1400px",
-        marginLeft: "auto",
-        marginRight: "auto",
-        display: "flex",
-        flexDirection: "row",
-        marginBottom: "150px",
-        [theme.breakpoints.down("sm")]: {
-            width: "100%",
-            flexDirection: "column-reverse",
+        width: '90%',
+        maxWidth: '1400px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        display: 'flex',
+        flexDirection: 'row',
+        marginBottom: '150px',
+        [theme.breakpoints.down('sm')]: {
+            width: '100%',
+            flexDirection: 'column-reverse',
         },
     },
     videoPlaylist: {
-        minWidth: "400px",
-        maxWidth: "600px",
-        height: "550px",
-        overflow: "scroll",
-        overflowY: "scroll",
-        [theme.breakpoints.down("sm")]: {
-            width: "100%",
-            minWidth: "100%",
+        minWidth: '400px',
+        maxWidth: '600px',
+        height: '550px',
+        overflow: 'scroll',
+        overflowY: 'scroll',
+        [theme.breakpoints.down('sm')]: {
+            width: '100%',
+            minWidth: '100%',
         },
-        [theme.breakpoints.up("lg")]: {
-            height: "700px",
+        [theme.breakpoints.up('lg')]: {
+            height: '700px',
         },
     },
     videoPlayer: {
-        margin: "auto",
-        outline: "none",
-        height: "550px",
-        [theme.breakpoints.up("lg")]: {
-            height: "700px",
+        margin: 'auto',
+        outline: 'none',
+        height: '550px',
+        [theme.breakpoints.up('lg')]: {
+            height: '700px',
         },
     },
     videoTitle: {
-        marginTop: "auto",
-        marginBottom: "auto",
+        marginTop: 'auto',
+        marginBottom: 'auto',
         fontFamily: fontFamily,
         fontSize: fontSmall,
-        whiteSpace: "pre-wrap",
+        whiteSpace: 'pre-wrap',
     },
     videoDescription: {
         fontFamily: fontFamily,
         fontSize: fontSmall,
-        whiteSpace: "pre-wrap",
+        whiteSpace: 'pre-wrap',
     },
     Spinner: {
-        marginTop: "auto",
-        marginBottom: "5px",
-        marginLeft: "15px",
-        height: "24px",
-        outline: "none",
+        marginTop: 'auto',
+        marginBottom: '5px',
+        marginLeft: '15px',
+        height: '24px',
+        outline: 'none',
     },
 }));
 
 // clickable expansions
 const ExpansionPanel = withStyles({
     root: {
-        border: "1px solid rgba(0, 0, 0, .125)",
-        boxShadow: "none",
-        "&:not(:last-child)": {
+        border: '1px solid rgba(0, 0, 0, .125)',
+        boxShadow: 'none',
+        '&:not(:last-child)': {
             borderBottom: 0,
         },
-        "&:before": {
-            display: "none",
+        '&:before': {
+            display: 'none',
         },
-        "&$expanded": {
-            margin: "auto",
+        '&$expanded': {
+            margin: 'auto',
         },
     },
     expanded: {},
@@ -112,17 +112,17 @@ const ExpansionPanel = withStyles({
 // clickable expansions
 const ExpansionPanelSummary = withStyles({
     root: {
-        backgroundColor: "rgba(0, 0, 0, .03)",
-        borderBottom: "1px solid rgba(0, 0, 0, .125)",
+        backgroundColor: 'rgba(0, 0, 0, .03)',
+        borderBottom: '1px solid rgba(0, 0, 0, .125)',
         marginBottom: -1,
         minHeight: 56,
-        "&$expanded": {
+        '&$expanded': {
             minHeight: 56,
         },
     },
     content: {
-        "&$expanded": {
-            margin: "12px 0",
+        '&$expanded': {
+            margin: '12px 0',
         },
     },
     expanded: {},
@@ -168,8 +168,8 @@ async function fetchMainData() {
 function SermonPage({ setScreen }) {
     const classes = useStyles();
     const player = useRef(null);
-    const [curVideo, setCurVideo] = React.useState("");
-    const [expanded, setExpanded] = React.useState("");
+    const [curVideo, setCurVideo] = React.useState('');
+    const [expanded, setExpanded] = React.useState('');
 
     const initState = {
         sermons: [],
@@ -191,17 +191,20 @@ function SermonPage({ setScreen }) {
     }, []);
 
     const initStateMain = {
-        monthlyversetitle: "",
-        monthlyversesecondtitle: "",
-        monthlyverse: "",
-        liveyoutubechannel: "",
-        choirtitle: "",
-        choirvideo: "",
-        singingtitle: "",
-        singingvideo: "",
-        modalcontent: "",
-        modalcontentheader: "",
-        jubo: "",
+        monthlyversetitle: '',
+        monthlyversesecondtitle: '',
+        monthlyverse: '',
+        liveyoutubechannel: '',
+        choirtitle: '',
+        choirvideo: '',
+        singingtitle: '',
+        singingvideo: '',
+        modalcontent: '',
+        modalcontentheader: '',
+        jubo: '',
+        phone: '',
+        email: '',
+        address: '',
     };
 
     // hook for setting information from php server / db
@@ -211,7 +214,6 @@ function SermonPage({ setScreen }) {
     useEffect(() => {
         async function getSetting() {
             const result = await fetchMainData();
-            console.log(result);
             setMainsetting(result);
         }
         getSetting();
@@ -230,7 +232,11 @@ function SermonPage({ setScreen }) {
     return (
         <div className={classes.content}>
             <div className={classes.header}>
-                <Typography variant="h3" component="h3" className={classes.headerTitle}>
+                <Typography
+                    variant="h3"
+                    component="h3"
+                    className={classes.headerTitle}
+                >
                     SERMON
                 </Typography>
                 <Divider />
@@ -249,35 +255,62 @@ function SermonPage({ setScreen }) {
                                       onChange={handleChange(video)}
                                       key={video.sermondate}
                                   >
-                                      <ExpansionPanelSummary aria-controls="panel1d-content" id="panel1d-header">
-                                          <Typography className={classes.videoTitle}>{video.title}</Typography>
+                                      <ExpansionPanelSummary
+                                          aria-controls="panel1d-content"
+                                          id="panel1d-header"
+                                      >
+                                          <Typography
+                                              className={classes.videoTitle}
+                                          >
+                                              {video.title}
+                                          </Typography>
                                           {video.src === curVideo ? (
-                                              <img src={audioSpinner} className={classes.Spinner} alt={"spinner"} />
+                                              <img
+                                                  src={audioSpinner}
+                                                  className={classes.Spinner}
+                                                  alt={'spinner'}
+                                              />
                                           ) : (
-                                              ""
+                                              ''
                                           )}
                                       </ExpansionPanelSummary>
                                       <ExpansionPanelDetails>
-                                          <Typography className={classes.videoDescription}>
-                                              {video.content && video.content !== ""
+                                          <Typography
+                                              className={
+                                                  classes.videoDescription
+                                              }
+                                          >
+                                              {video.content &&
+                                              video.content !== ''
                                                   ? video.content
-                                                  : video.title + "에 있었던 2부 예배 설교입니다."}
+                                                  : video.title +
+                                                    '에 있었던 2부 예배 설교입니다.'}
                                           </Typography>
                                       </ExpansionPanelDetails>
                                   </ExpansionPanel>
                               );
                           })
-                        : ""}
+                        : ''}
                 </div>
                 {sermons && sermons.length > 0 ? (
-                    <Player ref={player} fluid={false} autoPlay className={classes.videoPlayer} width={"100%"}>
+                    <Player
+                        ref={player}
+                        fluid={false}
+                        autoPlay
+                        className={classes.videoPlayer}
+                        width={'100%'}
+                    >
                         <source src={videoUrlPrefix + curVideo} />
                     </Player>
                 ) : (
-                    ""
+                    ''
                 )}
             </div>
-            <Footer phone={mainsetting.phone} email={mainsetting.email} address={mainsetting.address} />
+            <Footer
+                phone={mainsetting.phone}
+                email={mainsetting.email}
+                address={mainsetting.address}
+            />
         </div>
     );
 }

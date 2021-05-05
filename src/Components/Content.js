@@ -1,111 +1,114 @@
-import React, { useState, useEffect } from "react";
-import { useCookies } from "react-cookie";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
-import { Typography, Modal, Button, Link } from "@material-ui/core";
-import MonthlyVerse from "./MonthlyVerse";
-import Live from "./Live";
-import Sermon from "./Sermon";
-import Media from "./Media";
-import News from "./News";
-import Gallery from "./Gallery";
-import Contact from "./Contact";
-import Footer from "./Footer";
-import ModalContent from "./ModalContent";
-import VizSensor from "react-visibility-sensor";
-import grey from "@material-ui/core/colors/grey";
-import Spinner from "./svg/grid.svg";
-import { fontFamily, fontXBig, fontBig } from "./Constants";
+import React, { useState, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { Typography, Modal, Button, Link } from '@material-ui/core';
+import MonthlyVerse from './MonthlyVerse';
+import Live from './Live';
+import Sermon from './Sermon';
+import Media from './Media';
+import News from './News';
+import Gallery from './Gallery';
+import Contact from './Contact';
+import Footer from './Footer';
+import ModalContent from './ModalContent';
+import VizSensor from 'react-visibility-sensor';
+import grey from '@material-ui/core/colors/grey';
+import Spinner from './svg/grid.svg';
+import { fontFamily, fontXBig, fontBig } from './Constants';
 
 // main header background src address
-const headerBackGround = "https://edmontoncc.net/media/photo/본당4-scaled.jpg";
+const headerBackGround = 'https://edmontoncc.net/media/photo/본당4-scaled.jpg';
 
 // css styles
 const useStyles = makeStyles((theme) => ({
     content: {
-        display: "block",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "left",
-        width: "100%",
-        wordBreak: "keep-all",
-        marginTop: "30px",
-        textAlign: "left",
-        [theme.breakpoints.down("sm")]: {
-            fontSize: "1rem",
+        display: 'block',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'left',
+        width: '100%',
+        wordBreak: 'keep-all',
+        marginTop: '30px',
+        textAlign: 'left',
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '1rem',
         },
     },
     header: {
-        display: "flex",
-        height: "100vh",
-        minHeight: "100vh",
-        width: "100%",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "left",
-        position: "relative",
-        marginBottom: "40px",
-        wordBreak: "keep-all",
+        display: 'flex',
+        height: '100vh',
+        minHeight: '100vh',
+        width: '100%',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'left',
+        position: 'relative',
+        marginBottom: '40px',
+        wordBreak: 'keep-all',
     },
     background: {
         backgroundImage: `url(${headerBackGround})`,
-        filter: "brightness(70%)",
-        width: "100%",
-        height: "100vh",
-        position: "absolute",
-        backgroundSize: "cover",
-        backgroundAttachment: "fixed",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        [theme.breakpoints.down("sm")]: {
-            backgroundAttachment: "scroll",
+        filter: 'brightness(70%)',
+        width: '100%',
+        height: '100vh',
+        position: 'absolute',
+        backgroundSize: 'cover',
+        backgroundAttachment: 'fixed',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        [theme.breakpoints.down('sm')]: {
+            backgroundAttachment: 'scroll',
         },
     },
     headerTitle1: {
         color: grey[100],
-        marginLeft: "auto",
-        marginRight: "auto",
-        wordBreak: "keep-all",
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        wordBreak: 'keep-all',
         zIndex: 100,
         fontFamily: fontFamily,
         fontSize: fontBig,
         fontWeight: 600,
-        [theme.breakpoints.down("xs")]: {
-            marginLeft: "30px",
-            marginRight: "30px",
+        width: 'fit-content',
+        [theme.breakpoints.down('xs')]: {
+            marginLeft: 'auto',
+            marginRight: 'auto',
         },
     },
     headerTitle2: {
         color: grey[100],
-        marginLeft: "auto",
-        marginRight: "auto",
-        marginTop: "30px",
-        wordBreak: "keep-all",
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        marginTop: '30px',
+        wordBreak: 'keep-all',
         zIndex: 100,
         fontFamily: fontFamily,
         fontSize: fontXBig,
         fontWeight: 600,
-        [theme.breakpoints.down("xs")]: {
-            marginLeft: "30px",
-            marginRight: "30px",
+        width: 'fit-content',
+        [theme.breakpoints.down('xs')]: {
+            marginLeft: 'auto',
+            marginRight: 'auto',
         },
     },
     LoadingModal: {
         backgroundColor: grey[100],
-        textAlign: "center",
+        textAlign: 'center',
         zIndex: 100,
     },
     Spinner: {
-        marginTop: "300px",
-        outline: "none",
+        marginTop: '300px',
+        outline: 'none',
     },
     popModal: {
-        textAlign: "center",
+        textAlign: 'center',
     },
     link: {
         color: grey[800],
-        textDecoration: "none",
+        textDecoration: 'none',
         fontFamily: fontFamily,
-        margin: "40px auto 0 auto",
+        margin: '40px auto 0 auto',
+        width: 'fit-content',
     },
 }));
 
@@ -124,15 +127,15 @@ async function fetchData() {
 function Content({ setScreen }) {
     const classes = useStyles();
     const initState = {
-        monthlyversetitle: "",
-        monthlyversesecondtitle: "",
-        monthlyverse: "",
-        liveyoutubechannel: "",
-        liveinfo: "",
-        choirtitle: "",
-        choirvideo: "",
-        singingtitle: "",
-        singingvideo: "",
+        monthlyversetitle: '',
+        monthlyversesecondtitle: '',
+        monthlyverse: '',
+        liveyoutubechannel: '',
+        liveinfo: '',
+        choirtitle: '',
+        choirvideo: '',
+        singingtitle: '',
+        singingvideo: '',
         modal: 0,
     };
 
@@ -153,9 +156,9 @@ function Content({ setScreen }) {
     const [isLoading, setIsLoading] = useState(false);
 
     // hook for set cookies
-    const [cookies, setCookie] = useCookies(["edmontoncc"]);
+    const [cookies, setCookie] = useCookies(['edmontoncc']);
     if (!cookies.edmontoncc) {
-        setCookie("edmontoncc", "yes");
+        setCookie('edmontoncc', 'yes');
     }
 
     // hook to decide rendering pop up or not
@@ -163,12 +166,12 @@ function Content({ setScreen }) {
 
     // helper function for set cookie to "not desplay pop up"
     function handleCookieOff() {
-        setCookie("edmontoncc", "no");
+        setCookie('edmontoncc', 'no');
     }
 
     // helper function for set cookie to "desplay pop up"
     function setPopHandler() {
-        setCookie("edmontoncc", "yes");
+        setCookie('edmontoncc', 'yes');
         setPop(false);
     }
 
@@ -182,42 +185,42 @@ function Content({ setScreen }) {
     // helper functions to know where the user's viewpoint
     function monthlyVerseOnChange(isVisible) {
         if (isVisible) {
-            setScreen("monthlyverse");
+            setScreen('monthlyverse');
         }
     }
     function liveOnChange(isVisible) {
         if (isVisible) {
-            setScreen("live");
+            setScreen('live');
         }
     }
     function sermonOnChange(isVisible) {
         if (isVisible) {
-            setScreen("sermon");
+            setScreen('sermon');
         }
     }
     function mediaOnChange(isVisible) {
         if (isVisible) {
-            setScreen("media");
+            setScreen('media');
         }
     }
     function newsOnChange(isVisible) {
         if (isVisible) {
-            setScreen("news");
+            setScreen('news');
         }
     }
     function galleryOnChange(isVisible) {
         if (isVisible) {
-            setScreen("gallery");
+            setScreen('gallery');
         }
     }
     function contactOnChange(isVisible) {
         if (isVisible) {
-            setScreen("contact");
+            setScreen('contact');
         }
     }
     function headerOnChange(isVisible) {
         if (isVisible) {
-            setScreen("header");
+            setScreen('header');
         }
     }
 
@@ -225,11 +228,11 @@ function Content({ setScreen }) {
     const ColorButton = withStyles((theme) => ({
         root: {
             color: grey[800],
-            width: "300px",
-            fontSize: "1.5em",
-            fontWeight: "600",
+            width: '300px',
+            fontSize: '1.5em',
+            fontWeight: '600',
             backgroundColor: grey[100],
-            "&:hover": {
+            '&:hover': {
                 backgroundColor: grey[100],
             },
         },
@@ -245,14 +248,23 @@ function Content({ setScreen }) {
                 onClose={() => {}}
                 className={classes.LoadingModal}
             >
-                <img src={Spinner} className={classes.Spinner} alt={"spinner"} onLoad={handleModalClose()} />
+                <img
+                    src={Spinner}
+                    className={classes.Spinner}
+                    alt={'spinner'}
+                    onLoad={handleModalClose()}
+                />
             </Modal>
             {/* If cookie is yes, render pop up */}
-            {mainsetting.modal === "yes" && cookies.edmontoncc === "yes" && (
+            {/* {mainsetting.modal === 'yes' && cookies.edmontoncc === 'yes' && (
                 <Modal
                     aria-labelledby="announcement"
                     aria-describedby="announcement-description"
-                    open={cookies.edmontoncc ? cookies.edmontoncc === "yes" && pop : pop}
+                    open={
+                        cookies.edmontoncc
+                            ? cookies.edmontoncc === 'yes' && pop
+                            : pop
+                    }
                     onClose={setPopHandler}
                     className={classes.popModal}
                 >
@@ -263,55 +275,81 @@ function Content({ setScreen }) {
                         setPopHandler={setPopHandler}
                     />
                 </Modal>
-            )}
+            )} */}
             {/* Main page header */}
-            <VizSensor partialVisibility offset={{ top: 400, bottom: 400 }} onChange={headerOnChange}>
-                <div className={classes.header} id={"header"}>
+            <VizSensor
+                partialVisibility
+                offset={{ top: 400, bottom: 400 }}
+                onChange={headerOnChange}
+            >
+                <div className={classes.header} id={'header'}>
                     <div className={classes.background}></div>
-                    <Typography variant="h4" component="h4" className={classes.headerTitle1}>
+                    <Typography
+                        variant="h4"
+                        component="h4"
+                        className={classes.headerTitle1}
+                    >
                         Fix your thoughts on JESUS
                     </Typography>
-                    <Typography variant="h3" component="h3" className={classes.headerTitle2}>
+                    <Typography
+                        variant="h3"
+                        component="h3"
+                        className={classes.headerTitle2}
+                    >
                         예수를 깊이 생각하라
                     </Typography>
 
                     <Link
-                        href="https://docs.google.com/forms/d/e/1FAIpQLSeEX_v6qV5qOUN_4BqEwxWXentp6KzMrsJpWqbjoZsz_lwzPA/viewform"
+                        href="https://docs.google.com/forms/d/e/1FAIpQLScutSrE4ahQy4O8Ytuqkwz0M5NQo768tSmvgnh8lRmzvJmRJA/viewform?usp=pp_url"
                         className={classes.link}
                     >
                         <ColorButton>주일 9시 예배 참석 신청서</ColorButton>
-                    </Link>
-
-                    <Link
-                        href="https://docs.google.com/forms/d/e/1FAIpQLSdP9zeFPZulhq8UX2bAypJO_oUk1wEtC5nCb3sgamhFDOrj-Q/viewform"
-                        className={classes.link}
-                    >
-                        <ColorButton>어린이 예배 참석 신청서</ColorButton>
                     </Link>
                 </div>
             </VizSensor>
 
             {/* Monthly verse section */}
-            <VizSensor partialVisibility offset={{ top: 460, bottom: 300 }} onChange={monthlyVerseOnChange}>
+            <VizSensor
+                partialVisibility
+                offset={{ top: 460, bottom: 300 }}
+                onChange={monthlyVerseOnChange}
+            >
                 <MonthlyVerse
                     monthlyversetitle={mainsetting.monthlyversetitle}
-                    monthlyversesecondtitle={mainsetting.monthlyversesecondtitle}
+                    monthlyversesecondtitle={
+                        mainsetting.monthlyversesecondtitle
+                    }
                     monthlyverse={mainsetting.monthlyverse}
                 />
             </VizSensor>
 
             {/* Live youtube section */}
-            <VizSensor partialVisibility offset={{ top: 460, bottom: 300 }} onChange={liveOnChange}>
-                <Live youtubeChannel={mainsetting.liveyoutubechannel} liveinfo={mainsetting.liveinfo} />
+            <VizSensor
+                partialVisibility
+                offset={{ top: 460, bottom: 300 }}
+                onChange={liveOnChange}
+            >
+                <Live
+                    youtubeChannel={mainsetting.liveyoutubechannel}
+                    liveinfo={mainsetting.liveinfo}
+                />
             </VizSensor>
 
             {/* Sermon section */}
-            <VizSensor partialVisibility offset={{ top: 460, bottom: 300 }} onChange={sermonOnChange}>
+            <VizSensor
+                partialVisibility
+                offset={{ top: 460, bottom: 300 }}
+                onChange={sermonOnChange}
+            >
                 <Sermon />
             </VizSensor>
 
             {/* Media section */}
-            <VizSensor partialVisibility offset={{ top: 460, bottom: 300 }} onChange={mediaOnChange}>
+            <VizSensor
+                partialVisibility
+                offset={{ top: 460, bottom: 300 }}
+                onChange={mediaOnChange}
+            >
                 <Media
                     choirtitle={mainsetting.choirtitle}
                     choirvideo={mainsetting.choirvideo}
@@ -320,23 +358,34 @@ function Content({ setScreen }) {
                 />
             </VizSensor>
 
-            {/* News section */}
-            <VizSensor partialVisibility offset={{ top: 460, bottom: 300 }} onChange={newsOnChange}>
-                <News />
-            </VizSensor>
-
             {/* Gallery section */}
-            <VizSensor partialVisibility offset={{ top: 460, bottom: 300 }} onChange={galleryOnChange}>
+            <VizSensor
+                partialVisibility
+                offset={{ top: 460, bottom: 300 }}
+                onChange={galleryOnChange}
+            >
                 <Gallery />
             </VizSensor>
 
             {/* Contact section */}
-            <VizSensor partialVisibility offset={{ top: 460, bottom: 300 }} onChange={contactOnChange}>
-                <Contact phone={mainsetting.phone} email={mainsetting.email} address={mainsetting.address} />
+            <VizSensor
+                partialVisibility
+                offset={{ top: 460, bottom: 300 }}
+                onChange={contactOnChange}
+            >
+                <Contact
+                    phone={mainsetting.phone}
+                    email={mainsetting.email}
+                    address={mainsetting.address}
+                />
             </VizSensor>
 
             {/* Footer section */}
-            <Footer phone={mainsetting.phone} email={mainsetting.email} address={mainsetting.address} />
+            <Footer
+                phone={mainsetting.phone}
+                email={mainsetting.email}
+                address={mainsetting.address}
+            />
         </div>
     );
 }
