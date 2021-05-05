@@ -1,28 +1,29 @@
-import React, { useState, useEffect } from "react";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
-import { Typography, Divider, ExpansionPanel } from "@material-ui/core";
-import MuiExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import Img from "react-image";
-import GetAppIcon from "@material-ui/icons/GetApp";
-import grey from "@material-ui/core/colors/grey";
-import { fontFamily, fontXBig, fontSmall } from "./Constants";
+import React, { useState, useEffect } from 'react';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { Typography, Divider, ExpansionPanel } from '@material-ui/core';
+import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import Img from 'react-image';
+import GetAppIcon from '@material-ui/icons/GetApp';
+import grey from '@material-ui/core/colors/grey';
+import { fontFamily, fontXBig, fontSmall } from './Constants';
+import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
 
-import Footer from "./Footer";
+import Footer from './Footer';
 
 // clickable expansions
 const ExpansionPanelSummary = withStyles({
     root: {
-        backgroundColor: "rgba(0, 0, 0, .03)",
-        borderBottom: "1px solid rgba(0, 0, 0, .125)",
+        backgroundColor: 'rgba(0, 0, 0, .03)',
+        borderBottom: '1px solid rgba(0, 0, 0, .125)',
         marginBottom: -1,
         minHeight: 56,
-        "&$expanded": {
+        '&$expanded': {
             minHeight: 56,
         },
     },
     content: {
-        "&$expanded": {
-            margin: "12px 0",
+        '&$expanded': {
+            margin: '12px 0',
         },
     },
     expanded: {},
@@ -31,75 +32,75 @@ const ExpansionPanelSummary = withStyles({
 // css styles
 const useStyles = makeStyles((theme) => ({
     content: {
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "left",
-        width: "100%",
-        wordBreak: "keep-all",
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'left',
+        width: '100%',
+        wordBreak: 'keep-all',
     },
     header: {
-        marginTop: "130px",
-        marginBottom: "40px",
-        marginLeft: "auto",
-        marginRight: "auto",
-        width: "300px",
-        textAlign: "center",
+        marginTop: '130px',
+        marginBottom: '40px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        width: '300px',
+        textAlign: 'center',
     },
     headerTitle: {
         fontFamily: fontFamily,
         fontSize: fontXBig,
-        marginTop: "20px",
+        marginTop: '20px',
     },
     juboContainer: {
-        width: "90%",
-        maxWidth: "1400px",
-        marginLeft: "auto",
-        marginRight: "auto",
-        display: "flex",
-        flexDirection: "row",
-        marginBottom: "150px",
-        [theme.breakpoints.down("sm")]: {
-            width: "100%",
-            flexDirection: "column-reverse",
+        width: '90%',
+        maxWidth: '1400px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        display: 'flex',
+        flexDirection: 'row',
+        marginBottom: '150px',
+        [theme.breakpoints.down('sm')]: {
+            width: '100%',
+            flexDirection: 'column-reverse',
         },
     },
     jubo: {},
     juboList: {
-        minWidth: "420px",
-        maxWidth: "420px",
-        height: "550px",
-        overflow: "scroll",
-        [theme.breakpoints.down("sm")]: {
-            width: "100%",
-            minWidth: "100%",
+        minWidth: '420px',
+        maxWidth: '420px',
+        height: '550px',
+        overflow: 'scroll',
+        [theme.breakpoints.down('sm')]: {
+            width: '100%',
+            minWidth: '100%',
         },
-        [theme.breakpoints.up("lg")]: {
-            height: "700px",
+        [theme.breakpoints.up('lg')]: {
+            height: '700px',
         },
     },
     juboTitle: {
-        marginTop: "auto",
-        marginBottom: "auto",
+        marginTop: 'auto',
+        marginBottom: 'auto',
         fontFamily: fontFamily,
         fontSize: fontSmall,
-        whiteSpace: "pre-wrap",
+        whiteSpace: 'pre-wrap',
     },
     selectedJuboTitle: {
-        marginTop: "auto",
-        marginBottom: "auto",
+        marginTop: 'auto',
+        marginBottom: 'auto',
         fontFamily: fontFamily,
         fontSize: fontSmall,
-        whiteSpace: "pre-wrap",
+        whiteSpace: 'pre-wrap',
         fontWeight: 600,
     },
     juboImg: {
-        width: "100%",
-        height: "auto",
-        objectFit: "contain",
+        width: '100%',
+        height: 'auto',
+        objectFit: 'contain',
     },
     downIcon: {
-        marginLeft: "15px",
+        marginLeft: '15px',
         color: grey[500],
     },
 }));
@@ -137,16 +138,16 @@ async function fetchJuboData() {
 function JuboPage() {
     const classes = useStyles();
     const initState = {
-        monthlyversetitle: "",
-        monthlyversesecondtitle: "",
-        monthlyverse: "",
-        liveyoutubechannel: "",
-        choirtitle: "",
-        choirvideo: "",
-        singingtitle: "",
-        singingvideo: "",
-        modalcontent: "",
-        modalcontentheader: "",
+        monthlyversetitle: '',
+        monthlyversesecondtitle: '',
+        monthlyverse: '',
+        liveyoutubechannel: '',
+        choirtitle: '',
+        choirvideo: '',
+        singingtitle: '',
+        singingvideo: '',
+        modalcontent: '',
+        modalcontentheader: '',
     };
     const juboState = [];
 
@@ -172,10 +173,18 @@ function JuboPage() {
         setCurrentJubo(index);
     };
 
+    if (jubo && jubo.length > 0) {
+        console.log(jubo[currentJubo]);
+    }
+
     return (
         <div className={classes.content}>
             <div className={classes.header}>
-                <Typography variant="h3" component="h3" className={classes.headerTitle}>
+                <Typography
+                    variant="h3"
+                    component="h3"
+                    className={classes.headerTitle}
+                >
                     주보
                 </Typography>
                 <Divider />
@@ -184,9 +193,12 @@ function JuboPage() {
                 <div className={classes.juboContainer}>
                     <div className={classes.juboList}>
                         {jubo.map((j, index) => {
-                            console.log(index);
                             return (
-                                <ExpansionPanel square expanded={false} key={j.jobodate}>
+                                <ExpansionPanel
+                                    square
+                                    expanded={false}
+                                    key={j.jobodate}
+                                >
                                     <ExpansionPanelSummary
                                         aria-controls="panel1d-content"
                                         id="panel1d-header"
@@ -194,13 +206,17 @@ function JuboPage() {
                                     >
                                         <Typography
                                             className={
-                                                index === currentJubo ? classes.selectedJuboTitle : classes.juboTitle
+                                                index === currentJubo
+                                                    ? classes.selectedJuboTitle
+                                                    : classes.juboTitle
                                             }
                                         >
                                             {j.jubotitle}
                                         </Typography>
                                         <a href={j.jubopdf}>
-                                            <GetAppIcon className={classes.downIcon} />
+                                            <GetAppIcon
+                                                className={classes.downIcon}
+                                            />
                                         </a>
                                     </ExpansionPanelSummary>
                                 </ExpansionPanel>
@@ -208,14 +224,20 @@ function JuboPage() {
                         })}
                     </div>
                     <div className={classes.jubo}>
-                        <Img src={jubo[currentJubo].page1} className={classes.juboImg} />
-                        <Img src={jubo[currentJubo].page2} className={classes.juboImg} />
+                        <Document file={jubo[currentJubo].jubopdf}>
+                            <Page pageNumber={1} className={classes.juboImg} />
+                            <Page pageNumber={2} className={classes.juboImg} />
+                        </Document>
                     </div>
                 </div>
             ) : (
-                ""
+                ''
             )}
-            <Footer phone={mainsetting.phone} email={mainsetting.email} address={mainsetting.address} />
+            <Footer
+                phone={mainsetting.phone}
+                email={mainsetting.email}
+                address={mainsetting.address}
+            />
         </div>
     );
 }

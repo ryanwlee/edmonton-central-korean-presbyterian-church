@@ -279,7 +279,7 @@ function Content({ setScreen }) {
                         href="https://docs.google.com/forms/d/e/1FAIpQLSeEX_v6qV5qOUN_4BqEwxWXentp6KzMrsJpWqbjoZsz_lwzPA/viewform"
                         className={classes.link}
                     >
-                        <ColorButton>주일 11시 예배 참석 신청서</ColorButton>
+                        <ColorButton>주일 9시 예배 참석 신청서</ColorButton>
                     </Link>
 
                     <Link

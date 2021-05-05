@@ -128,7 +128,7 @@ function Sermon() {
             >
               {sermon.description}
             </Typography>
-            <Link to={"/*/sermon"}>
+            <Link to={"/sermon"}>
               <Typography
                 variant="caption"
                 display="block"
