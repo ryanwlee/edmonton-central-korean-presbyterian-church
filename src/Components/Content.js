@@ -305,6 +305,13 @@ function Content({ setScreen }) {
                     >
                         <ColorButton>주일 9시 예배 참석 신청서</ColorButton>
                     </Link>
+
+                    <Link
+                        href="https://docs.google.com/forms/d/e/1FAIpQLScLygoHtj4DrsFvm5FlxqAo1jaT4kevFrlIABWmrpz5-hXxeA/viewform?usp=pp_url"
+                        className={classes.link}
+                    >
+                        <ColorButton>주일 11시 예배 참석 신청서</ColorButton>
+                    </Link>
                 </div>
             </VizSensor>
 
