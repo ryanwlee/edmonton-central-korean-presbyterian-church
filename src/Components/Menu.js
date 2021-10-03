@@ -92,6 +92,13 @@ function Menu(current) {
                 주보
             </Link>
             <Link
+                to={'/#gallery'}
+                className={classes.link}
+                onClick={() => onClick()}
+            >
+                GALLERY
+            </Link>
+            <Link
                 to={'/donation'}
                 className={classes.link}
                 onClick={() => onClick()}
@@ -99,11 +106,11 @@ function Menu(current) {
                 헌금
             </Link>
             <Link
-                to={'/#gallery'}
+                to={'/baptism'}
                 className={classes.link}
                 onClick={() => onClick()}
             >
-                GALLERY
+                세례
             </Link>
             <Link
                 to={'/#contact'}

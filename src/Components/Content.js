@@ -9,12 +9,14 @@ import Media from './Media';
 import News from './News';
 import Gallery from './Gallery';
 import Contact from './Contact';
+import Baptism from './Baptism';
 import Footer from './Footer';
 import ModalContent from './ModalContent';
 import VizSensor from 'react-visibility-sensor';
 import grey from '@material-ui/core/colors/grey';
 import Spinner from './svg/grid.svg';
 import { fontFamily, fontXBig, fontBig } from './Constants';
+import YouthLive from './YouthLive';
 
 // main header background src address
 const headerBackGround = 'https://edmontoncc.net/media/photo/본당4-scaled.jpg';
@@ -307,7 +309,7 @@ function Content({ setScreen }) {
                     </Link>
 
                     <Link
-                        href="https://docs.google.com/forms/d/e/1FAIpQLScLygoHtj4DrsFvm5FlxqAo1jaT4kevFrlIABWmrpz5-hXxeA/viewform?usp=pp_url"
+                        href="https://docs.google.com/forms/d/e/1FAIpQLScPUxfUU1jj_JOmnAfD64t_i6pUwsmO-qOB-hP8AI_FU982pg/viewform?usp=pp_url"
                         className={classes.link}
                     >
                         <ColorButton>주일 11시 예배 참석 신청서</ColorButton>
@@ -337,6 +339,18 @@ function Content({ setScreen }) {
                 onChange={liveOnChange}
             >
                 <Live
+                    youtubeChannel={mainsetting.liveyoutubechannel}
+                    liveinfo={mainsetting.liveinfo}
+                />
+            </VizSensor>
+
+            {/* YouthLive youtube section */}
+            <VizSensor
+                partialVisibility
+                offset={{ top: 460, bottom: 300 }}
+                onChange={liveOnChange}
+            >
+                <YouthLive
                     youtubeChannel={mainsetting.liveyoutubechannel}
                     liveinfo={mainsetting.liveinfo}
                 />

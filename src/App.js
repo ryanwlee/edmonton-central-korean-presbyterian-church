@@ -5,6 +5,7 @@ import Menu from './Components/Menu';
 import Content from './Components/Content';
 import SermonPage from './Components/SermonPage';
 import JuboPage from './Components/JuboPage';
+import BaptismPage from './Components/BaptismPage';
 import DonationPage from './Components/DonationPage';
 import Appmenu from './Components/Appmenu';
 import SermonInfoPage from './Components/SermonInfoPage';
@@ -135,6 +136,9 @@ function App(props) {
                             </Route>
                             <Route path="/donation">
                                 <DonationPage />
+                            </Route>
+                            <Route path="/baptism">
+                                <BaptismPage />
                             </Route>
                             <Route path="/">
                                 <Content setScreen={setScreen} />

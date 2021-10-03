@@ -71,6 +71,9 @@ function Appmenu(current) {
             <Link to={'/donation'} className={classes.link}>
                 헌금
             </Link>
+            <Link to={'/baptism'} className={classes.link}>
+                세례
+            </Link>
             <Link to={'/#contact'} className={classes.link}>
                 오시는 길
             </Link>
