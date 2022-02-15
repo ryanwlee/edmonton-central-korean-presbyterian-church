@@ -88,6 +88,7 @@ const useStyles = makeStyles((theme) => ({
         fontSize: fontXBig,
         fontWeight: 600,
         width: 'fit-content',
+        textAlign: 'center',
         [theme.breakpoints.down('xs')]: {
             marginLeft: 'auto',
             marginRight: 'auto',
@@ -291,17 +292,24 @@ function Content({ setScreen }) {
                         component="h4"
                         className={classes.headerTitle1}
                     >
-                        Fix your thoughts on JESUS
+                        Experience Jesus Deeply
                     </Typography>
                     <Typography
                         variant="h3"
                         component="h3"
                         className={classes.headerTitle2}
                     >
-                        예수를 깊이 생각하라
+                        예수를 깊이 경험하라
                     </Typography>
-
-                    <Link
+                    <Typography
+                        variant="h5"
+                        component="h5"
+                        className={classes.headerTitle2}
+                        style={{ fontSize: '2rem' }}
+                    >
+                        1부, 2부 예배에 인원 제한 없이 참석이 가능합니다
+                    </Typography>
+                    {/* <Link
                         href="https://docs.google.com/forms/d/e/1FAIpQLScutSrE4ahQy4O8Ytuqkwz0M5NQo768tSmvgnh8lRmzvJmRJA/viewform?usp=pp_url"
                         className={classes.link}
                     >
@@ -313,7 +321,7 @@ function Content({ setScreen }) {
                         className={classes.link}
                     >
                         <ColorButton>주일 11시 예배 참석 신청서</ColorButton>
-                    </Link>
+                    </Link> */}
                 </div>
             </VizSensor>
 

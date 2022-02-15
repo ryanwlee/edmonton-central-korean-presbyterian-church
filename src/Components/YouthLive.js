@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
 
 function YouthLive(props) {
     const classes = useStyles();
-    const channelId = "UCG__EjoIVvHpwrE8lJCO--w"
+    const channelId = 'UCG__EjoIVvHpwrE8lJCO--w';
 
     return (
         <div className={classes.root} id={'live'}>
@@ -71,7 +71,7 @@ function YouthLive(props) {
                     component="h3"
                     className={classes.headerTitle}
                 >
-                    유아유치부 / 아동부 예배
+                    유아유치부 / 아동부 / YOUTH 예배
                 </Typography>
                 <Divider />
             </div>
@@ -115,6 +115,8 @@ function YouthLive(props) {
                     아동부 예배: 주일 오전 9시 30분
                     <br />
                     영유아유치부 예배: 주일 오전 10시 15분
+                    <br />
+                    YOUTH 예배: 주일 오전 11시 10분
                 </Typography>
 
                 {/* Link to youtube */}
