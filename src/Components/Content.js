@@ -287,7 +287,7 @@ function Content({ setScreen }) {
             >
                 <div className={classes.header} id={'header'}>
                     <div className={classes.background}></div>
-                    <Typography
+                    {/* <Typography
                         variant="h4"
                         component="h4"
                         className={classes.headerTitle1}
@@ -308,7 +308,7 @@ function Content({ setScreen }) {
                         style={{ fontSize: '2rem' }}
                     >
                         1부, 2부 예배에 인원 제한 없이 참석이 가능합니다
-                    </Typography>
+                    </Typography> */}
                     {/* <Link
                         href="https://docs.google.com/forms/d/e/1FAIpQLScutSrE4ahQy4O8Ytuqkwz0M5NQo768tSmvgnh8lRmzvJmRJA/viewform?usp=pp_url"
                         className={classes.link}
